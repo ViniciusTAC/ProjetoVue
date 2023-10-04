@@ -1,8 +1,11 @@
-O projetinho basico seria um quadro de kanban, como no Trello, Asana.. onde teriamos 6 colunas:
-backlog, priorizadas, a fazer, fazendo, revisando, prontas
+O Projeto basico seria um Quadro de Kanban, no esilo Trello, Asana. 
+Haverá 6 colunas:
+    Backlog, Priorizadas, A Fazer, Fazendo, Revisando, Prontas
 
-Em cada coluna teriamos os cards, que seriam as atividades ao clicar no card teriamos os detalhes da atividade, e podemos editar e colocar mais informaçoes, como data de conclusão, uma lista de sub-tarefas, e um feed de comentários e no card teriamos como passar para outra coluna, para nao ter o drag-n-drop dos cards entre as colunas
+Em cada coluna teriamos os cards, que seriam as atividades ao clicar no card teriamos os detalhes da atividade, 
+e podemos editar e colocar mais informaçoes, como data de conclusão, uma lista de sub-tarefas, e um feed de comentários
+e no card teriamos como passar para outra coluna, para nao ter o drag-n-drop dos cards entre as colunas
 
 e se quiser fazer um back em node simples para salvar os dados. Pode usar as tabelas em sql entao para esse projeto
 o tempo seria até dia 16/10.
-faz em vue 2, e depois fazemos o upgrade pro vue 3,
+faz em vue 2, e depois fazemos o upgrade pro vue 3
