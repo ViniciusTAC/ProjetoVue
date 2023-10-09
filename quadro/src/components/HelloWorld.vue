@@ -1,16 +1,16 @@
 <template>
   <div class="hello" data-app>
-    <div >
-      <Atividades/>
+    <div class="add">
+      <Atividades />
     </div>
-
+    <br>      <br>      <br>      <br>      <br>
   </div>
 </template>
 
 <script>
 import Atividades from './Atividades.vue';
 export default {
-  components:{
+  components: {
     Atividades,
   },
   name: 'HelloWorld',
@@ -19,19 +19,27 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
+.add {
+  margin-right: 15px;
+  float: right;
+}
+
 Atividades {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }

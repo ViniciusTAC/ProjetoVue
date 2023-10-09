@@ -1,42 +1,44 @@
 <template>
     <v-row justify="center">
-        <v-dialog v-model="dialog" width="600">
+        <v-dialog v-model="dialogs.dialog" width="600">
             <template v-slot:activator="{ props }">
-                <v-btn class="botao" color="primary" @click="abrir(true)" v-bind="props">
+                <!-- <v-btn class="botao" color="primary" @click="abrir(true)" v-bind="props">
                     Adicionar Atividades
-                </v-btn>
+                </v-btn> -->
             </template>
 
-            <div style="background-color: white;">
-                <div>
-                    <h3>
+            <div class="container">
+                <v-btn dark color="red" small class="fechar" variant="text" @click="abrir(false)">
+                    <v-icon dark>
+                        mdi-close
+                    </v-icon>Fechar
+                </v-btn>
+                <div class="texto">
+                    <h3 v-if="this.teste">
                         Adicionando Atividade no Quadro
                     </h3>
-                    <v-btn dark color="red" small class="fechar" variant="text" @click="abrir(false)">
-                        <v-icon dark>
-                            mdi-close
-                        </v-icon>Fechar
-                    </v-btn>
+                    <h3 v-else>
+                        Editando Atividade
+                        <br>{{ titulo }}
+                    </h3>
                 </div>
 
-
+                <br><br>
                 <v-form>
-                    <v-text-field class="input" :rules="[rules.required]" v-model="titulo" label="Título"
+                    <v-text-field class="input" :rules="[rules.required]" id="titulo" v-model="titulo" label="Título"
                         outlined></v-text-field>
+                    <v-text-field class="input" :rules="[rules.required]" id="descricao" v-model="descricao"
+                        label="Descrição" outlined></v-text-field>
+                    <v-textarea class="input" v-model="subTarefas" label="Sub-Taferas" outlined></v-textarea>
+                    <v-textarea class="input" v-model="comentario" label="Comentários" outlined></v-textarea>
                     <br>
-                    <v-text-field class="input" :rules="[rules.required]" v-model="descricao" label="Descrição"
-                        outlined></v-text-field>
-                    <br>
-                    <v-textarea class="input" v-model="subTarefas" label="Sub-Taferas" counter maxlength="500" full-width
-                        outlined></v-textarea>
-                    <br>
-                    <v-textarea class="input" v-model="comentario" label="Comentários" counter full-width
-                        single-line></v-textarea>
-                    <br>
-                    <br>
-                    <v-btn dark color="green" class="salvar" variant="text" @click="abrir(false)">
+                    <v-btn dark color="green" class="salvar" variant="text" @click="salvar()">
+                        <v-icon>
+                            mdi-content-save
+                        </v-icon>
                         Salvar
                     </v-btn>
+
                 </v-form>
             </div>
 
@@ -46,15 +48,18 @@
     </v-row>
 </template>
 <script>
+
 export default {
+    props:["dialogs"],
     data: () => ({
+        teste: true,
         dialog: false,
         titulo: '',
         descricao: '',
         subTarefas: '',
         comentario: '',
         rules: {
-            required: value => !!value || 'Field is required',
+            required: value => !!value || 'Campo obrigatorio!',
         },
     }),
     methods: {
@@ -63,24 +68,59 @@ export default {
             this.descricao = ''
             this.subTarefas = ''
             this.comentario = ''
-            this.dialog = verificacao
-        }
+            this.dialogs.dialog = verificacao
+        },
+        salvar: function () {
+            if (this.titulo.length == 0 || this.descricao.length == 0) {
+                if (this.titulo.length == 0) {
+                    document.getElementById("titulo").focus();
+                } else {
+                    document.getElementById("descricao").focus();
+                }
+            }
+            else {
+                var salvar = new Object();
+                salvar.titulo = this.titulo
+                salvar.descricao = this.descricao
+                salvar.subTarefas = this.subTarefas
+                salvar.comentario = this.comentario
+                console.log(salvar)
+                this.abrir(false)
+            }
+        },
+    },
+    mounted() {
+        
+    },
+    created(){
+        console.log(this.dialogs)
     }
 }
 </script>
 <style scoped>
+.container {
+    background-color: white;
+    padding: auto;
+}
+
 .botao {
+    float: right;
     margin: auto;
 }
 
 .fechar {
-    margin: -1;
+    float: right;
 }
+
+.texto {
+    text-align: center;
+}
+
 
 .input {
     padding-top: 5px;
-    margin: auto;
-    max-width: 75%;
+    margin: 5px;
+    max-width: 95%;
 }
 
 .salvar {
