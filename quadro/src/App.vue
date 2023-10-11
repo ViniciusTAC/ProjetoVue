@@ -7,19 +7,20 @@
       <div>
         <div class="add">
 
-          <v-btn slot="activator" color="primary" @click="showDialog(true,idade)">
+          <v-btn slot="activator" color="primary" @click="showDialog(true, idade)">
             Adicionar Atividades
           </v-btn>
           <Atividades :dialogs="dialogs" />
         </div>
       </div>
       <br>
-      <v-container>
+
+      <v-container class="quadro">
         <v-row>
           <v-col>
             <v-card style="background-color: #ea6e6b; font-weight: bold;">BackLog</v-card>
-            <v-col v-for="n in 10" :key="n" @click="showDialog(true,n)">{{ n }}
-              
+            <v-col v-for="n in 10" :key="n" @click="showDialog(true, n)">{{ n }}
+
             </v-col>
             <v-col>5</v-col>
           </v-col>
@@ -49,10 +50,6 @@
             <v-col v-for="n in 10" :key="n">{{ n }}</v-col>
           </v-col>
         </v-row>
-        <v-row>
-
-        </v-row>
-
       </v-container>
     </v-app>
   </div>
@@ -82,6 +79,7 @@ export default {
 
 
     },
+
     showDialog(verificacao, id) {
       this.dialogs.id = id
       this.dialogs.dialog = verificacao
@@ -100,10 +98,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #344250;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.quadro {
+  max-width: 2000px !important;
+  width: 150%;
+
 }
 
 .add {
   margin-right: 15px;
   float: right;
-}
-</style>
+}</style>
