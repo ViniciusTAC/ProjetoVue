@@ -14,11 +14,11 @@
                     </v-icon>Fechar
                 </v-btn>
                 <div class="texto">
-                    <h3 v-if="this.teste">
+                    <h3 v-if="!this.edicaoBol">
                         Adicionando Atividade no Quadro
                     </h3>
                     <h3 v-else>
-                        Editando Atividade
+                        Editando Atividade {{ dialogs.id }}
                         <br>{{ titulo }}
                     </h3>
                 </div>
@@ -29,6 +29,9 @@
                         outlined></v-text-field>
                     <v-text-field class="input" :rules="[rules.required]" id="descricao" v-model="descricao"
                         label="Descrição" outlined></v-text-field>
+
+                    <v-date-picker v-if="!this.edicaoBol" color="green lighten-1"  locale="pt-br" v-model="dataFinalizacao"></v-date-picker>
+
                     <v-textarea class="input" v-model="subTarefas" label="Sub-Taferas" outlined></v-textarea>
                     <v-textarea class="input" v-model="comentario" label="Comentários" outlined></v-textarea>
                     <br>
@@ -50,14 +53,15 @@
 <script>
 
 export default {
-    props:["dialogs"],
+    props: ["dialogs"],
     data: () => ({
-        teste: true,
         dialog: false,
         titulo: '',
         descricao: '',
+        dataFinalizacao: '',
         subTarefas: '',
         comentario: '',
+        edicaoBol: false,
         rules: {
             required: value => !!value || 'Campo obrigatorio!',
         },
@@ -71,29 +75,48 @@ export default {
             this.dialogs.dialog = verificacao
         },
         salvar: function () {
-            if (this.titulo.length == 0 || this.descricao.length == 0) {
-                if (this.titulo.length == 0) {
-                    document.getElementById("titulo").focus();
-                } else {
-                    document.getElementById("descricao").focus();
-                }
-            }
-            else {
-                var salvar = new Object();
-                salvar.titulo = this.titulo
-                salvar.descricao = this.descricao
-                salvar.subTarefas = this.subTarefas
-                salvar.comentario = this.comentario
-                console.log(salvar)
-                this.abrir(false)
+            console.log(this.dataFinalizacao)
+            // if (this.titulo.length == 0 || this.descricao.length == 0) {
+            //     if (this.titulo.length == 0) {
+            //         document.getElementById("titulo").focus();
+            //     } else {
+            //         document.getElementById("descricao").focus();
+            //     }
+            // }
+            // else {
+            //     var salvar = new Object();
+            //     salvar.titulo = this.titulo
+            //     salvar.descricao = this.descricao
+            //     salvar.subTarefas = this.subTarefas
+            //     salvar.comentario = this.comentario
+            //     console.log(salvar)
+            //     this.abrir(false)
+            // }
+        },
+        edicao: function () {
+            if (this.dialogs.id == 0) {
+                this.edicaoBol = false
+            } else {
+                this.edicaoBol = true
+
             }
         },
     },
-    mounted() {
-        
+    computed: {
+
     },
-    created(){
-        console.log(this.dialogs)
+    mounted() {
+    },
+    created() {
+
+    },
+    watch: {
+        dialogs: {
+            handler: function () {
+                this.edicao()
+            },
+            deep: true
+        },
     }
 }
 </script>
