@@ -1,6 +1,6 @@
 <template>
     <v-row justify="center">
-        <v-dialog v-model="dialogs.dialog" width="600">
+        <v-dialog v-model="dialog.aberto" width="600">
             <template v-slot:activator="{ props }">
                 <!-- <v-btn class="botao" color="primary" @click="abrir(true)" v-bind="props">
                     Adicionar Atividades
@@ -18,7 +18,7 @@
                         Adicionando Atividade no Quadro
                     </h3>
                     <h3 v-else>
-                        Editando Atividade {{ dialogs.id }}
+                        Editando Atividade {{ dialog.id }}
                         <br>{{ titulo }}
                     </h3>
                 </div>
@@ -30,8 +30,7 @@
                     <v-text-field class="input" :rules="[rules.required]" id="descricao" v-model="descricao"
                         label="Descrição" outlined></v-text-field>
 
-                    <v-date-picker v-if="!this.edicaoBol" color="green lighten-1" locale="pt-br"
-                        v-model="dataInicio"></v-date-picker>
+                    <v-date-picker color="green lighten-1" locale="pt-br" v-model="dataInicio"></v-date-picker>
 
                     <v-textarea class="input" v-model="subTarefas" label="Sub-Taferas" outlined></v-textarea>
                     <v-textarea class="input" v-model="comentario" label="Comentários" outlined></v-textarea>
@@ -76,14 +75,15 @@
 <script>
 
 export default {
-    props: ["dialogs"],
+    props: ["dialog"],
     data: () => ({
-        dialog: false,
-        titulo: '',
-        descricao: '',
-        dataInicio: '',
-        subTarefas: '',
-        comentario: '',
+        aberto: false,
+        atividade: {},
+        titulo: null,
+        descricao: null,
+        dataInicio: null,
+        subTarefas: null,
+        comentario: null,
         edicaoBol: false,
         rules: {
             required: value => !!value || 'Campo obrigatorio!',
@@ -100,10 +100,31 @@ export default {
         offset: true,
     }),
     methods: {
+        async getDados() {
+
+            const req = await fetch("  http://localhost:3000/atividades?id=" + this.dialog.id);
+
+            const atividades = await req.json();
+            this.atividade = atividades[0]
+            console.log(this.atividade);
+            this.titulo = this.atividade.titulo
+            this.descricao = this.atividade.descricao
+            this.dataInicio = this.atividade.dataInicio
+
+            this.subTarefas = this.atividade.subTarefas
+            this.comentario = this.atividade.comentario
+
+        },
+
+
         abrir: function (verificacao) {
-            this.dialogs.dialog = verificacao
+            this.dialog.aberto = verificacao
+            if (!verificacao) {
+                //location.reload();
+            }
         },
         salvar: function () {
+
             if (this.titulo.length == 0 || this.descricao.length == 0) {
                 if (this.titulo.length == 0) {
                     document.getElementById("titulo").focus();
@@ -125,19 +146,26 @@ export default {
         },
         mudarStatus(index, titulo) {
             console.log("Mudar Status p/", index, '-', titulo)
-            this.dialogs.dialog = false
-            //location.reload();
+            this.dialog.aberto = false
+            location.reload();
 
         },
         edicao: function () {
-            if (!this.dialogs.dialog) {
-                this.dialogs.id = 0
+            if (!this.dialog.aberto) {
+                this.dialog.id = 0
 
             }
-            if (this.dialogs.id == 0) {
+            if (this.dialog.id == 0) {
                 this.edicaoBol = false
+                this.titulo = ""
+                this.descricao = ""
+                this.dataInicio = null
+                this.subTarefas = null
+                this.comentario = null
+
             } else {
                 this.edicaoBol = true
+                this.getDados()
 
             }
         },
@@ -151,9 +179,11 @@ export default {
 
     },
     watch: {
-        dialogs: {
+        dialog: {
             handler: function () {
                 this.edicao()
+
+
             },
             deep: true
         },

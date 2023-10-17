@@ -7,53 +7,27 @@
       <div>
         <div class="add">
 
-          <v-btn slot="activator" color="primary" @click="showDialog(true, dialogs.id)">
+          <v-btn slot="activator" color="primary" @click="abrirDialog(true, dialog.id)">
             Adicionar Atividades
           </v-btn>
-          <Atividades :dialogs="dialogs" />
+          <Atividades :dialog="dialog" />
         </div>
       </div>
       <br>
 
       <v-container class="quadro">
         <v-row>
-          <v-col>
-            <v-card style="background-color: #ea6e6b;" class="titulo">BackLog</v-card>
 
-            <v-col @click="showDialog(true, 1)">
-              <v-card class="card">{{ titulo }} <br> {{ descricao }} </v-card>
-            </v-col>
-            <v-col v-for="n in 4" :key="n" @click="showDialog(true, n)"><v-card class="card">{{ n }} <br> {{ n }}
+          <v-col v-for="(item, index) in status" :key="index">
+            <v-card v-bind:color="item.color" class="titulo">{{ item.tipo }}</v-card>
+            <v-col v-for="(item, index) in atividades" :key="index" @click="abrirDialog(true, item.id)"><v-card
+                class="card">Título: {{ item.titulo }} <br>Descrição: {{ item.descricao }}
               </v-card>
 
             </v-col>
 
           </v-col>
-          <v-col>
-            <v-card style="background-color: #bd3dbd;" class="titulo">Priorizadas</v-card>
 
-            <v-col v-for="n in 3" :key="n" @click="showDialog(true, n)"><v-card><v-card class="card">{{ n }} <br> {{ n }} </v-card></v-card></v-col>
-          </v-col>
-          <v-col>
-            <v-card style="background-color: #7d7d7d;" class="titulo">A Fazer</v-card>
-
-            <v-col v-for="n in 5" :key="n" @click="showDialog(true, n)"><v-card class="card">{{ n }} <br> {{ n }} </v-card></v-col>
-          </v-col>
-          <v-col>
-            <v-card style="background-color: #799fd4;" class="titulo">Fazendo</v-card>
-
-            <v-col v-for="n in 5" :key="n" @click="showDialog(true, n)"><v-card class="card">{{ n }} <br> {{ n }} </v-card></v-col>
-          </v-col>
-          <v-col>
-            <v-card style="background-color: #e08d6f;" class="titulo">Revisando</v-card>
-
-            <v-col v-for="n in 5" :key="n" @click="showDialog(true, n)"><v-card class="card">{{ n }} <br> {{ n }} </v-card></v-col>
-          </v-col>
-          <v-col>
-            <v-card style="background-color: #a6eca5;" class="titulo">Prontas</v-card>
-
-            <v-col v-for="n in 5" :key="n" @click="showDialog(true, n)"><v-card class="card">{{ n }} <br> {{ n }} </v-card></v-col>
-          </v-col>
         </v-row>
       </v-container>
     </v-app>
@@ -68,38 +42,58 @@ export default {
   },
   data() {
     return {
+      status: [
+      ],
+      atividades: [
+      ],
       titulo: 'Título: Teste 10-12-2023',
       descricao: "Descrição: Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
-      dialogs: {
-        dialog: false,
+      dialog: {
+        aberto: false,
         id: 0,
       }
     }
   },
   methods: {
-    getDados() {
-      //const req = await fetch("http://localhost:300/ingredientes");
-      //const data = await req.json();
-      //console.log('teste1');
+    async getDados() {
+
+      const req = await fetch(" http://localhost:3000/status");
+      const status = await req.json();
+      this.status = status
+      //console.log(this.status);
+
+      //const reqs = await fetch("  http://localhost:3000/atividades?idStatus=2");
+      const reqs = await fetch("  http://localhost:3000/atividades");
+      const atividades = await reqs.json();
+      this.atividades = atividades
+      //console.log(this.atividades);
+
+      this.formataTexto();
 
 
     },
     formataTexto() {
-      if (this.descricao.length > 30) {
-        this.descricao = this.descricao.slice(0, 75)
-        this.descricao = this.descricao + '...'
+
+      for (let index = 0; index < this.atividades.length; index++) {
+        if (this.atividades[index].descricao.length > 60) {
+          this.atividades[index].descricao = this.atividades[index].descricao.slice(0, 64)
+          this.atividades[index].descricao = this.atividades[index].descricao + '...'
+        }
       }
 
+
+
     },
-    showDialog(verificacao, id) {
-      this.dialogs.id = id
-      this.dialogs.dialog = verificacao
+    abrirDialog(verificacao, id) {
+      this.dialog.id = id
+      this.dialog.aberto = verificacao
 
     }
   },
   mounted() {
-    this.formataTexto();
+
     this.getDados()
+
   },
 }
 </script>
