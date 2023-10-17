@@ -1,0 +1,212 @@
+{
+  "status": [
+    {
+      "idStatus": 1,
+      "tipo": "Backlog",
+      "color": "#ea6e6b"
+    },
+    {
+      "idStatus": 2,
+      "tipo": "Priorizadas",
+      "color": "#bd3dbd"
+    },
+    {
+      "idStatus": 3,
+      "tipo": "A Fazer",
+      "color": "#7d7d7d"
+    },
+    {
+      "idStatus": 4,
+      "tipo": "Fazendo",
+      "color": "#799fd4"
+    },
+    {
+      "idStatus": 5,
+      "tipo": "Revisando",
+      "color": "#e08d6f"
+    },
+    {
+      "idStatus": 6,
+      "tipo": "Prontas",
+      "color": "#a6eca5"
+    }
+  ],
+  "atividades": [
+    {
+      "id": 1,
+      "titulo": "Teste 10-12-2023",
+      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
+      "dataInicio": "10-11-2023",
+      "dataFinalizacao": "",
+      "dataRevisao": "",
+      "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
+      "subTarefas": [
+        "Revisar",
+        "Testar",
+        "corrigir"
+      ],
+      "status": "Backlog",
+      "idStatus": 1
+    },
+    {
+      "id": 2,
+      "titulo": "Teste 11-12-2023",
+      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
+      "dataInicio": "10-11-2023",
+      "dataFinalizacao": "",
+      "dataRevisao": "",
+      "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
+      "subTarefas": [
+        "Revisar",
+        "Testar",
+        "corrigir"
+      ],
+      "status": "Backlog",
+      "idStatus": 1
+    },
+    {
+      "id": 3,
+      "titulo": "Mudança no botao",
+      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
+      "dataInicio": "10-11-2023",
+      "dataFinalizacao": "",
+      "dataRevisao": "",
+      "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
+      "subTarefas": [
+        "Revisar",
+        "Testar",
+        "corrigir"
+      ],
+      "status": "Priorizadas",
+      "idStatus": 2
+    },
+    {
+      "id": 4,
+      "titulo": "Design do texto",
+      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
+      "dataInicio": "10-11-2023",
+      "dataFinalizacao": "",
+      "dataRevisao": "",
+      "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
+      "subTarefas": [],
+      "status": "Priorizadas",
+      "idStatus": 2
+    },
+    {
+      "id": 5,
+      "titulo": "Adição do texto",
+      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
+      "dataInicio": "10-11-2023",
+      "dataFinalizacao": "",
+      "dataRevisao": "",
+      "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
+      "subTarefas": [],
+      "status": "A Fazer",
+      "idStatus": 3
+    },
+    {
+      "id": 6,
+      "titulo": "Alterar cores",
+      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
+      "dataInicio": "10-11-2023",
+      "dataFinalizacao": "",
+      "dataRevisao": "",
+      "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
+      "subTarefas": [],
+      "status": "A Fazer",
+      "idStatus": 3
+    },
+    {
+      "id": 7,
+      "titulo": "Nova aba no menu",
+      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde. In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
+      "dataInicio": "10-11-2023",
+      "dataFinalizacao": "",
+      "dataRevisao": "",
+      "comentario": "",
+      "subTarefas": [
+        "Revisar",
+        "Testar",
+        "corrigir"
+      ],
+      "status": "Fazendo",
+      "idStatus": 4
+    },
+    {
+      "id": 8,
+      "titulo": "Rotacionar layout",
+      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
+      "dataInicio": "10-11-2023",
+      "dataFinalizacao": "",
+      "dataRevisao": "",
+      "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
+      "subTarefas": [],
+      "status": "Fazendo",
+      "idStatus": 4
+    },
+    {
+      "id": 9,
+      "titulo": "Adição dos texto iniciais",
+      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
+      "dataInicio": "10-01-2023",
+      "dataFinalizacao": "10-11-2023",
+      "dataRevisao": "10-11-2023",
+      "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
+      "subTarefas": [
+        "Revisar",
+        "Testar",
+        "corrigir"
+      ],
+      "status": "Revisando",
+      "idStatus": 5
+    },
+    {
+      "id": 10,
+      "titulo": "Definição das cores do sistema",
+      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
+      "dataInicio": "10-01-2023",
+      "dataFinalizacao": "10-11-2023",
+      "dataRevisao": "10-11-2023",
+      "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
+      "subTarefas": [
+        "Revisar",
+        "Testar",
+        "corrigir"
+      ],
+      "status": "Revisando",
+      "idStatus": 5
+    },
+    {
+      "id": 11,
+      "titulo": "Primeiro layout",
+      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
+      "dataInicio": "09-28-2023",
+      "dataFinalizacao": "10-01-2023",
+      "dataRevisao": "10-01-2023",
+      "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
+      "subTarefas": [
+        "Revisar",
+        "Testar",
+        "corrigir"
+      ],
+      "status": "Prontas",
+      "idStatus": 6
+    },
+    {
+      "id": 12,
+      "titulo": "Criação do sistema",
+      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
+      "dataInicio": "09-21-2023",
+      "dataFinalizacao": "09-30-2023",
+      "dataRevisao": "09-30-2023",
+      "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
+      "subTarefas": [
+        "Revisar",
+        "Testar",
+        "corrigir"
+      ],
+      "status": "Prontas",
+      "idStatus": 6
+    }
+  ]
+}

@@ -101,10 +101,6 @@ export default {
     }),
     methods: {
         abrir: function (verificacao) {
-            this.titulo = ''
-            this.descricao = ''
-            this.subTarefas = ''
-            this.comentario = ''
             this.dialogs.dialog = verificacao
         },
         salvar: function () {
@@ -124,16 +120,19 @@ export default {
                 salvar.comentario = this.comentario
                 console.log(salvar)
                 this.abrir(false)
+                //location.reload();
             }
         },
         mudarStatus(index, titulo) {
             console.log("Mudar Status p/", index, '-', titulo)
             this.dialogs.dialog = false
+            //location.reload();
 
         },
         edicao: function () {
             if (!this.dialogs.dialog) {
                 this.dialogs.id = 0
+
             }
             if (this.dialogs.id == 0) {
                 this.edicaoBol = false
