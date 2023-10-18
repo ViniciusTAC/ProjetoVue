@@ -14,7 +14,7 @@
                     </v-icon>Fechar
                 </v-btn>
                 <div class="texto">
-                    <h3 v-if="!this.edicaoBol">
+                    <h3 v-if="!this.verificaEdicao">
                         Adicionando Atividade no Quadro
                     </h3>
                     <h3 v-else>
@@ -34,6 +34,9 @@
 
                     <v-textarea class="input" v-model="subTarefas" label="Sub-Taferas" outlined></v-textarea>
                     <v-textarea class="input" v-model="comentario" label="Comentários" outlined></v-textarea>
+
+                    <v-date-picker v-if="statusRevisao" id="dataRevisao" :rules="[rules.required]" color="green lighten-1" locale="pt-br"
+                        v-model="dataRevisao"></v-date-picker>
                     <br>
                     <v-btn dark color="green" class="salvar" variant="text" @click="salvar()">
                         <v-icon>
@@ -42,7 +45,7 @@
                         Salvar
                     </v-btn>
 
-                    <v-menu v-if="this.edicaoBol" top :offset-x="offset">
+                    <v-menu v-if="this.verificaEdicao" top :offset-x="offset">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn dark color="black" class="mudarStatus" v-bind="attrs" v-on="on">
                                 Mudar Status
@@ -53,10 +56,12 @@
                         </template>
 
                         <v-list>
-                            <v-list-item v-for="(item, index) in items" :key="index">
-                                <v-btn v-bind:color="item.color" variant="text" @click="mudarStatus(index, item.title)">
+                            <v-list-item v-for="(item, index) in status" :key="index"
+                                v-if="item.idStatus != atividade.idStatus">
+                                <v-btn v-bind:color="item.color" variant="text"
+                                    @click="mudarStatus(item.idStatus, item.tipo)">
                                     <span style="font-weight: bold;">
-                                        {{ item.title }}
+                                        {{ item.tipo }}
                                     </span>
                                 </v-btn>
                             </v-list-item>
@@ -84,18 +89,14 @@ export default {
         dataInicio: null,
         subTarefas: null,
         comentario: null,
-        edicaoBol: false,
+        dataRevisao: null,
+        statusRevisao: false,
+        verificaEdicao: false,
         rules: {
             required: value => !!value || 'Campo obrigatorio!',
         },
 
-        items: [
-            { title: 'Backlog', color: '#ea6e6b' },
-            { title: 'Priorizadas', color: '#bd3dbd' },
-            { title: 'A Fazer', color: '#7d7d7d' },
-            { title: 'Fazendo', color: '#799fd4' },
-            { title: 'Revisando', color: '#e08d6f' },
-            { title: 'Prontas', color: '#a6eca5' },
+        status: [
         ],
         offset: true,
     }),
@@ -106,7 +107,7 @@ export default {
 
             const atividades = await req.json();
             this.atividade = atividades[0]
-            console.log(this.atividade);
+            //console.log(this.atividade);
             this.titulo = this.atividade.titulo
             this.descricao = this.atividade.descricao
             this.dataInicio = this.atividade.dataInicio
@@ -116,15 +117,19 @@ export default {
 
         },
 
+        async getStatus() {
 
+            const req = await fetch(" http://localhost:3000/status");
+            const status = await req.json();
+            this.status = status
+            //console.log(this.status);
+
+
+        },
         abrir: function (verificacao) {
             this.dialog.aberto = verificacao
-            if (!verificacao) {
-                //location.reload();
-            }
         },
         salvar: function () {
-
             if (this.titulo.length == 0 || this.descricao.length == 0) {
                 if (this.titulo.length == 0) {
                     document.getElementById("titulo").focus();
@@ -133,21 +138,113 @@ export default {
                 }
             }
             else {
+
                 var salvar = new Object();
                 salvar.titulo = this.titulo
                 salvar.descricao = this.descricao
                 salvar.dataInicio = this.dataInicio
                 salvar.subTarefas = this.subTarefas
                 salvar.comentario = this.comentario
-                console.log(salvar)
+
+                if (!this.verificaEdicao) {
+                    salvar.idStatus = 1
+                    salvar.status = "Backlog"
+                    //console.log(salvar)
+                    this.adicionarAtividade(salvar)
+
+                } else {
+                    this.atualizarAtividade(salvar)
+
+                }
                 this.abrir(false)
-                //location.reload();
+
             }
         },
+        async adicionarAtividade(atividade) {
+            const reqs = await fetch("  http://localhost:3000/atividades");
+            const atividades = await reqs.json();
+            atividade.id = atividades.at(-1).id + 1
+
+            const dataJson = JSON.stringify(atividade);
+            const req = await fetch("http://localhost:3000/atividades", {
+                method: "POST",
+                headers: { "content-Type": "application/json" },
+                body: dataJson
+            });
+            this.$fire({
+                title: `Adição de atividade realizada com sucesso`,
+                type: "success",
+                timer: 3000
+            }).then(r => {
+
+            });
+            setTimeout(() => {
+                location.reload()
+            }, "2750");
+        },
+        async atualizarAtividade(atividade) {
+            const dataJson = JSON.stringify(atividade);
+            const res = await fetch('http://localhost:3000/atividades/' + this.dialog.id, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: dataJson
+            })
+
+            this.$fire({
+                title: `Edição realizada com sucesso`,
+                type: "success",
+                timer: 3000
+            }).then(r => {
+
+            });
+            setTimeout(() => {
+                location.reload()
+            }, "2750");
+        },
         mudarStatus(index, titulo) {
-            console.log("Mudar Status p/", index, '-', titulo)
-            this.dialog.aberto = false
-            location.reload();
+            //console.log("Mudar Status p/", index, '-', titulo)
+            if (index == 5) {
+                this.statusRevisao = true
+                console.log(this.dataRevisao)
+                if (this.dataRevisao != null) {
+                    console.log('manda para mudarStatus com a data da revisão')
+                    }
+                else{
+                   
+                }
+            } else {
+                this.mudarStatusUpdate(index, titulo)
+            }
+
+            // this.dialog.aberto = false
+
+            // 
+
+        },
+        async mudarStatusUpdate(index, titulo) {
+            const res = await fetch('http://localhost:3000/atividades/' + this.dialog.id, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ idStatus: index, status: titulo }),
+            })
+            // in any component
+
+            this.$fire({
+                title: `Alteração de Status realizada com sucesso`,
+                text: `Do Status: ` + this.atividade.status + ` para ` + titulo,
+                type: "success",
+                timer: 3000
+            }).then(r => {
+
+            });
+            setTimeout(() => {
+                location.reload()
+            }, "2750");
+
 
         },
         edicao: function () {
@@ -156,7 +253,7 @@ export default {
 
             }
             if (this.dialog.id == 0) {
-                this.edicaoBol = false
+                this.verificaEdicao = false
                 this.titulo = ""
                 this.descricao = ""
                 this.dataInicio = null
@@ -164,8 +261,9 @@ export default {
                 this.comentario = null
 
             } else {
-                this.edicaoBol = true
+                this.verificaEdicao = true
                 this.getDados()
+                this.getStatus()
 
             }
         },

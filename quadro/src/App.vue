@@ -18,12 +18,13 @@
       <v-container class="quadro">
         <v-row>
 
-          <v-col v-for="(item, index) in status" :key="index">
-            <v-card v-bind:color="item.color" class="titulo">{{ item.tipo }}</v-card>
-            <v-col v-for="(item, index) in atividades" :key="index" @click="abrirDialog(true, item.id)"><v-card
-                class="card">Título: {{ item.titulo }} <br>Descrição: {{ item.descricao }}
+          <v-col v-for="(items, index) in status" :key="index">
+            <v-card v-bind:color="items.color" class="titulo">{{ items.tipo }}</v-card>
+            <v-col v-for="(item, index) in atividades" :key="index" v-if="items.idStatus == item.idStatus"  @click="abrirDialog(true, item.id)">
+              <v-card class="card">
+                Título: {{ item.titulo }} <br>Descrição: {{
+                  item.descricao }}
               </v-card>
-
             </v-col>
 
           </v-col>
@@ -116,8 +117,8 @@ export default {
 }
 
 .add {
-  margin-right: 15px;
-  float: right;
+  margin-left: 15px;
+  float: left;
 }
 
 .titulo {
