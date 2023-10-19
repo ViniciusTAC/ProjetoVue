@@ -37,14 +37,10 @@
       "titulo": "Teste 10-12-2023",
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       "dataInicio": "2023-10-11",
-      "dataFinalizacao": "",
-      "dataRevisao": "",
+      "dataFinalizacao": null,
+      "dataRevisao": null,
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
-      "subTarefas": [
-        "Revisar",
-        "Testar",
-        "corrigir"
-      ],
+      "subTarefas": "Revisar, Testar, corrigir",
       "status": "Backlog",
       "idStatus": 1
     },
@@ -53,14 +49,10 @@
       "titulo": "Teste 11-12-2023",
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       "dataInicio": "2023-10-11",
-      "dataFinalizacao": "",
-      "dataRevisao": "",
+      "dataFinalizacao": null,
+      "dataRevisao": null,
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
-      "subTarefas": [
-        "Revisar",
-        "Testar",
-        "corrigir"
-      ],
+      "subTarefas": "Revisar, Testar, corrigir",
       "status": "Backlog",
       "idStatus": 1
     },
@@ -69,14 +61,10 @@
       "titulo": "Mudança no botao",
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       "dataInicio": "2023-10-11",
-      "dataFinalizacao": "",
-      "dataRevisao": "",
+      "dataFinalizacao": null,
+      "dataRevisao": null,
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
-      "subTarefas": [
-        "Revisar",
-        "Testar",
-        "corrigir"
-      ],
+      "subTarefas": "Revisar, Testar, corrigir",
       "status": "Priorizadas",
       "idStatus": 2
     },
@@ -85,10 +73,10 @@
       "titulo": "Design do texto",
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       "dataInicio": "2023-10-11",
-      "dataFinalizacao": "",
-      "dataRevisao": "",
+      "dataFinalizacao": null,
+      "dataRevisao": null,
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
-      "subTarefas": [],
+      "subTarefas": null,
       "status": "Priorizadas",
       "idStatus": 2
     },
@@ -97,10 +85,10 @@
       "titulo": "Adição do texto",
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       "dataInicio": "2023-10-11",
-      "dataFinalizacao": "",
-      "dataRevisao": "",
+      "dataFinalizacao": null,
+      "dataRevisao": null,
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
-      "subTarefas": [],
+      "subTarefas": null,
       "status": "A Fazer",
       "idStatus": 3
     },
@@ -109,10 +97,10 @@
       "titulo": "Alterar cores",
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       "dataInicio": "2023-10-11",
-      "dataFinalizacao": "",
-      "dataRevisao": "",
+      "dataFinalizacao": null,
+      "dataRevisao": null,
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
-      "subTarefas": [],
+      "subTarefas": null,
       "status": "A Fazer",
       "idStatus": 3
     },
@@ -121,14 +109,10 @@
       "titulo": "Nova aba no menu",
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde. In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
       "dataInicio": "2023-10-11",
-      "dataFinalizacao": "",
-      "dataRevisao": "",
+      "dataFinalizacao": null,
+      "dataRevisao": null,
       "comentario": "",
-      "subTarefas": [
-        "Revisar",
-        "Testar",
-        "corrigir"
-      ],
+      "subTarefas": "Revisar, Testar, corrigir",
       "status": "Fazendo",
       "idStatus": 4
     },
@@ -137,10 +121,10 @@
       "titulo": "Rotacionar layout",
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       "dataInicio": "2023-10-11",
-      "dataFinalizacao": "",
-      "dataRevisao": "",
+      "dataFinalizacao": null,
+      "dataRevisao": null,
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
-      "subTarefas": [],
+      "subTarefas": null,
       "status": "Fazendo",
       "idStatus": 4
     },
@@ -149,14 +133,10 @@
       "titulo": "Adição dos texto iniciais",
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       "dataInicio": "2023-10-01",
-      "dataFinalizacao": "",
+      "dataFinalizacao": null,
       "dataRevisao": "2023-10-11",
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
-      "subTarefas": [
-        "Revisar",
-        "Testar",
-        "corrigir"
-      ],
+      "subTarefas": "Revisar, Testar, corrigir",
       "status": "Revisando",
       "idStatus": 5
     },
@@ -165,14 +145,10 @@
       "titulo": "Definição das cores do sistema",
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       "dataInicio": "2023-10-01",
-      "dataFinalizacao": "",
+      "dataFinalizacao": null,
       "dataRevisao": "2023-10-11",
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
-      "subTarefas": [
-        "Revisar",
-        "Testar",
-        "corrigir"
-      ],
+      "subTarefas": "Revisar, Testar, corrigir",
       "status": "Revisando",
       "idStatus": 5
     },
@@ -184,11 +160,7 @@
       "dataFinalizacao": "2023-10-01",
       "dataRevisao": "2023-10-01",
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
-      "subTarefas": [
-        "Revisar",
-        "Testar",
-        "corrigir"
-      ],
+      "subTarefas": "Revisar, Testar, corrigir",
       "status": "Prontas",
       "idStatus": 6
     },
@@ -200,33 +172,45 @@
       "dataFinalizacao": "2023-09-30",
       "dataRevisao": "2023-09-30",
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
-      "subTarefas": [
-        "Revisar",
-        "Testar",
-        "corrigir"
-      ],
+      "subTarefas": "Revisar, Testar, corrigir",
       "status": "Prontas",
       "idStatus": 6
     },
     {
       "id": 13,
-      "titulo": "teste adicionar atividade 2",
+      "titulo": "Teste de alterar status ",
       "descricao": "teste teste teste",
       "dataInicio": "2023-10-19",
       "subTarefas": "teset",
       "comentario": "teset",
-      "status": "Fazendo",
-      "idStatus": 4
+      "status": "Revisando",
+      "idStatus": 5,
+      "dataRevisao": "2023-10-25",
+      "dataFinalizacao": null
     },
     {
       "titulo": "asdfastaessdfa",
       "descricao": "asdfasdf a",
-      "dataInicio": "2023-10-18",
+      "dataInicio": "2023-10-19",
       "subTarefas": null,
       "comentario": null,
-      "idStatus": 1,
-      "status": "Backlog",
-      "id": 14
+      "idStatus": 6,
+      "status": "Prontas",
+      "id": 14,
+      "dataRevisao": "2023-10-19",
+      "dataFinalizacao": "2023-10-19"
+    },
+    {
+      "titulo": "teste",
+      "descricao": "teste",
+      "dataInicio": "2023-10-20",
+      "subTarefas": null,
+      "comentario": null,
+      "idStatus": 6,
+      "status": "Prontas",
+      "id": 15,
+      "dataRevisao": "2023-10-24",
+      "dataFinalizacao": "2023-10-20"
     }
   ]
 }

@@ -6,7 +6,6 @@
       </h1>
       <div>
         <div class="add">
-
           <v-btn slot="activator" color="primary" @click="abrirDialog(true, dialog.id)">
             Adicionar Atividades
           </v-btn>
@@ -17,18 +16,16 @@
 
       <v-container class="quadro">
         <v-row>
-
           <v-col v-for="(items, index) in status" :key="index">
             <v-card v-bind:color="items.color" class="titulo">{{ items.tipo }}</v-card>
-            <v-col v-for="(item, index) in atividades" :key="index" v-if="items.idStatus == item.idStatus"  @click="abrirDialog(true, item.id)">
+            <v-col v-for="(item, index) in atividades" :key="index" v-if="items.idStatus == item.idStatus"
+              @click="abrirDialog(true, item.id)">
               <v-card class="card">
                 Título: {{ item.titulo }} <br>Descrição: {{
                   item.descricao }}
               </v-card>
             </v-col>
-
           </v-col>
-
         </v-row>
       </v-container>
     </v-app>
@@ -47,8 +44,6 @@ export default {
       ],
       atividades: [
       ],
-      titulo: 'Título: Teste 10-12-2023',
-      descricao: "Descrição: Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       dialog: {
         aberto: false,
         id: 0,
@@ -61,28 +56,21 @@ export default {
       const req = await fetch(" http://localhost:3000/status");
       const status = await req.json();
       this.status = status
-      //console.log(this.status);
 
-      //const reqs = await fetch("  http://localhost:3000/atividades?idStatus=2");
       const reqs = await fetch("  http://localhost:3000/atividades");
       const atividades = await reqs.json();
       this.atividades = atividades
-      //console.log(this.atividades);
 
       this.formataTexto();
 
-
     },
     formataTexto() {
-
       for (let index = 0; index < this.atividades.length; index++) {
         if (this.atividades[index].descricao.length > 60) {
           this.atividades[index].descricao = this.atividades[index].descricao.slice(0, 64)
           this.atividades[index].descricao = this.atividades[index].descricao + '...'
         }
       }
-
-
 
     },
     abrirDialog(verificacao, id) {
@@ -92,7 +80,6 @@ export default {
     }
   },
   mounted() {
-
     this.getDados()
 
   },
