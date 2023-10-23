@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <h1>
-        Quadro de atividades
-      </h1>
+      <h1>Quadro de atividades</h1>
       <div>
         <div class="add">
           <v-btn slot="activator" color="primary" @click="abrirDialog(true, dialog.id)">
@@ -12,78 +10,82 @@
           <Atividades :dialog="dialog" />
         </div>
       </div>
-      <br>
+      <br />
+        <Titulo />
 
-      <v-container class="quadro">
+
+
+
+      <!-- <v-container class="quadro">
         <v-row>
           <v-col v-for="(items, index) in status" :key="index">
-            <v-card v-bind:color="items.color" class="titulo">{{ items.tipo }}</v-card>
-            <v-col v-for="(item, index) in atividades.filter(atv => atv.idStatus == items.idStatus)" :key="index"
-              @click="abrirDialog(true, item.id)">
+            <v-card v-bind:color="items.color" class="titulo">{{
+              items.tipo
+            }}</v-card>
+            <v-col v-for="(item, index) in atividades.filter(
+              (atv) => atv.idStatus == items.idStatus
+            )" :key="index" @click="abrirDialog(true, item.id)">
               <v-card class="card">
-                Título: {{ item.titulo }} <br>Descrição: {{
-                  item.descricao }}
+                Título: {{ item.titulo }} <br />Descrição: {{ item.descricao }}
               </v-card>
             </v-col>
           </v-col>
         </v-row>
-      </v-container>
+      </v-container> -->
     </v-app>
   </div>
 </template>
 
 <script>
-import Atividades from './components/Atividades.vue';
+import Atividades from "./components/Atividades.vue";
+import Titulo from "./components/Titulo.vue";
 export default {
   components: {
     Atividades,
+    Titulo,
   },
   data() {
     return {
-      status: [
-      ],
-      atividades: [
-      ],
+      status: [],
+      atividades: [],
       dialog: {
         aberto: false,
         id: 0,
-      }
-    }
+      },
+    };
   },
   methods: {
     async getDados() {
-
       const req = await fetch(" http://localhost:3000/status");
       const status = await req.json();
-      this.status = status
+      this.status = status;
 
       const reqs = await fetch("  http://localhost:3000/atividades");
       const atividades = await reqs.json();
-      this.atividades = atividades
+      this.atividades = atividades;
 
       this.formataTexto();
-
     },
     formataTexto() {
       for (let index = 0; index < this.atividades.length; index++) {
         if (this.atividades[index].descricao.length > 60) {
-          this.atividades[index].descricao = this.atividades[index].descricao.slice(0, 64)
-          this.atividades[index].descricao = this.atividades[index].descricao + '...'
+          this.atividades[index].descricao = this.atividades[
+            index
+          ].descricao.slice(0, 64);
+          this.atividades[index].descricao =
+            this.atividades[index].descricao + "...";
         }
       }
-
     },
     abrirDialog(verificacao, id) {
-      this.dialog.id = id
-      this.dialog.aberto = verificacao
-
-    }
+      this.dialog.id = id;
+      this.dialog.aberto = verificacao;
+    },
   },
   mounted() {
-    this.getDados()
-
+    this.getDados();
   },
-}
+};
 </script>
 <style>
 #app {
@@ -100,7 +102,6 @@ export default {
 .quadro {
   max-width: 2000px !important;
   width: 150%;
-
 }
 
 .add {

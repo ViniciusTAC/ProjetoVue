@@ -29,11 +29,6 @@
       "idStatus": 6,
       "tipo": "Prontas",
       "color": "#a6eca5"
-    },
-    {
-      "idStatus": 7,
-      "tipo": "Teste",
-      "color": "#ffffff"
     }
   ],
   "atividades": [
@@ -233,9 +228,11 @@
       "dataInicio": "2023-10-20",
       "subTarefas": "asdfas dfa",
       "comentario": "asdfasdf",
-      "idStatus": 1,
-      "status": "Backlog",
-      "id": 17
+      "idStatus": 5,
+      "status": "Revisando",
+      "id": 17,
+      "dataRevisao": "2023-10-23",
+      "dataFinalizacao": null
     }
   ]
 }
