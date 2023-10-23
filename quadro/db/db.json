@@ -29,20 +29,25 @@
       "idStatus": 6,
       "tipo": "Prontas",
       "color": "#a6eca5"
+    },
+    {
+      "idStatus": 7,
+      "tipo": "Teste",
+      "color": "#ffffff"
     }
   ],
   "atividades": [
     {
       "id": 1,
-      "titulo": "Teste 10-12-2023",
+      "titulo": "Batata",
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       "dataInicio": "2023-10-11",
-      "dataFinalizacao": null,
-      "dataRevisao": null,
+      "dataFinalizacao": "2023-10-20",
+      "dataRevisao": "2023-10-20",
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
       "subTarefas": "Revisar, Testar, corrigir",
-      "status": "Backlog",
-      "idStatus": 1
+      "status": "Prontas",
+      "idStatus": 6
     },
     {
       "id": 2,
@@ -89,8 +94,8 @@
       "dataRevisao": null,
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
       "subTarefas": null,
-      "status": "A Fazer",
-      "idStatus": 3
+      "status": "Fazendo",
+      "idStatus": 4
     },
     {
       "id": 6,
@@ -134,11 +139,11 @@
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       "dataInicio": "2023-10-01",
       "dataFinalizacao": null,
-      "dataRevisao": "2023-10-11",
+      "dataRevisao": null,
       "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
       "subTarefas": "Revisar, Testar, corrigir",
-      "status": "Revisando",
-      "idStatus": 5
+      "status": "A Fazer",
+      "idStatus": 3
     },
     {
       "id": 10,
@@ -211,6 +216,26 @@
       "id": 15,
       "dataRevisao": "2023-10-24",
       "dataFinalizacao": "2023-10-20"
+    },
+    {
+      "titulo": "Teste de adicionar atividade",
+      "descricao": "Descrição qualquer",
+      "dataInicio": "2023-10-20",
+      "subTarefas": "teste de subtarefa",
+      "comentario": "teste de comentario",
+      "idStatus": 1,
+      "status": "Backlog",
+      "id": 16
+    },
+    {
+      "titulo": "teste qual",
+      "descricao": "asdf asdf a",
+      "dataInicio": "2023-10-20",
+      "subTarefas": "asdfas dfa",
+      "comentario": "asdfasdf",
+      "idStatus": 1,
+      "status": "Backlog",
+      "id": 17
     }
   ]
 }

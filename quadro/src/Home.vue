@@ -18,7 +18,7 @@
         <v-row>
           <v-col v-for="(items, index) in status" :key="index">
             <v-card v-bind:color="items.color" class="titulo">{{ items.tipo }}</v-card>
-            <v-col v-for="(item, index) in atividades" :key="index" v-if="items.idStatus == item.idStatus"
+            <v-col v-for="(item, index) in atividades.filter(atv => atv.idStatus == items.idStatus)" :key="index"
               @click="abrirDialog(true, item.id)">
               <v-card class="card">
                 Título: {{ item.titulo }} <br>Descrição: {{

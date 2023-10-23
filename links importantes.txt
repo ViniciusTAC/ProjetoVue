@@ -1,0 +1,34 @@
+https://github.com/ViniciusTAC/ProjetoVue/tree/main
+
+Informações importantes:
+  	- Local:   http://localhost:8084/
+  	- Network: http://192.168.0.109:8084/
+
+Link para estudo do projeto: 
+	https://codesandbox.io/examples/package/vue-kanban
+
+
+https://www.youtube.com/watch?v=8WxOxAzccHc&ab_channel=InstrutorFeij%C3%B3
+
+
+Data Table , Modal , Dialog VUE.JS VUETIFY
+https://www.youtube.com/watch?v=taEaFSLEru4&ab_channel=LukmanPutra
+
+----------------------
+Ruby on Tails
+
+
+Ruby on Rails Para Iniciantes: https://www.youtube.com/playlist?list=PLnV7i1DUV_zP6BV1xoy0TV5IkPcYtz6rx
+
+Curso de Ruby Para Iniciantes: https://www.youtube.com/playlist?list=PLnV7i1DUV_zOit4a_tEDf1_PcRd25dL7e
+
+How to install and configure Ruby on Rails: https://ubuntu.com/server/docs/programming-ruby-on-rails
+
+-------------------------------------
+WSL
+
+WSL: como executar programas e comandos Linux no Windows?: 
+https://www.alura.com.br/artigos/wsl-executar-programas-comandos-linux-no-windows?utm_term=&utm_campaign=%5BSearch%5D+%5BPerformance%5D+-+Dynamic+Search+Ads+-+Artigos+e+Conte%C3%BAdos&utm_source=adwords&utm_medium=ppc&hsa_acc=7964138385&hsa_cam=11384329873&hsa_grp=111087461203&hsa_ad=645853715422&hsa_src=g&hsa_tgt=dsa-843358956400&hsa_kw=&hsa_mt=&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAjwysipBhBXEiwApJOcu4IpoNO5XMpiind_Fcb1fp29Kp8bFuotwRsdo8H6kllw8d9VhS-VeRoCYGsQAvD_BwE
+
+Como instalar o Linux no Windows com o WSL: https://learn.microsoft.com/pt-br/windows/wsl/install
+
