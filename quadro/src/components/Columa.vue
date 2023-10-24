@@ -1,29 +1,21 @@
 <template>
     <div data-app>
         <div>
-            <br>
-
             <v-col v-for="(item, index) in atividades.filter(
                 (atv) => atv.idStatus == items.idStatus
-            )" :key="index" @click="showModal(`atividade/:id`)">
-                <Atividades :open="open" @close="open = false">
-                </Atividades>
+            )" :key="index" >
                 <Card :item=item />
-                <!-- <v-card class="card">
-                    Título: {{ item.titulo }} <br />Descrição: {{ item.descricao }}
-                </v-card> -->
             </v-col>
         </div>
     </div>
 </template>
   
 <script>
-import Atividades from "./Atividades.vue";
 import Card from "./Card.vue";
 export default {
     props: ["items"],
     components: {
-        Atividades, Card,
+        Card,
     },
     data() {
         return {
@@ -33,15 +25,10 @@ export default {
                 aberto: false,
                 id: 0,
             },
-
-            open: false
         };
     },
     methods: {
         async getDados() {
-            const req = await fetch(" http://localhost:3000/status");
-            this.status = await req.json();
-
             const reqs = await fetch("  http://localhost:3000/atividades");
             this.atividades = await reqs.json();
 
@@ -58,45 +45,18 @@ export default {
                 }
             }
         },
-        abrirDialog(verificacao, id) {
-            this.dialog.id = id;
-            this.dialog.aberto = verificacao;
-        },
-        showModal(name) {
-            
-            // this.$router.push(name).catch(() => { })
-            // console.log(this.$router)
-        }
     },
     created() {
-
-
     },
     mounted() {
         this.getDados();
-
     },
 }
 </script>
   
   
 <style scoped>
-.quadro {
-    max-width: 2000px !important;
-    width: 150%;
-}
 
-.titulo {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
 
-.card {
-    text-align: justify;
-    padding: 1%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: pointer;
-}
 </style>
   

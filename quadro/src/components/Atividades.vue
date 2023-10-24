@@ -1,8 +1,7 @@
 <template>
     <div :class="{ 'open': open }" class="modal">
         <div class="container">
-          
-            <v-btn dark color="red" small class="fechar" variant="text"  @click="$emit('close')">
+            <v-btn dark color="red" small class="fechar" variant="text" @click="$emit('close')">
                 <v-icon dark>
                     mdi-close
                 </v-icon>Fechar
@@ -17,28 +16,28 @@
                 </h3>
             </div>
             <br><br>
-            
+
             <v-form>
-                <v-text-field class="input" :rules="[rules.required]" id="titulo" v-model="titulo" label="Título"
+                <v-text-field class="input" :rules="[rules.required]" id="titulo" v-model="atividade.titulo" label="Título"
                     outlined></v-text-field>
-                <v-text-field class="input" :rules="[rules.required]" id="descricao" v-model="descricao"
+                <v-text-field class="input" :rules="[rules.required]" id="descricao" v-model="atividade.descricao"
                     label="Descrição" outlined></v-text-field>
-                <v-textarea class="input" v-model="subTarefas" label="Sub-Taferas" outlined></v-textarea>
-                <v-textarea class="input" v-model="comentario" label="Comentários" outlined></v-textarea>
+                <v-textarea class="input" v-model="atividade.subTarefas" label="Sub-Taferas" outlined></v-textarea>
+                <v-textarea class="input" v-model="atividade.comentario" label="Comentários" outlined></v-textarea>
 
                 <span style="  font-weight: bold;">Data Inicialização</span><br>
-                <v-date-picker color="green lighten-1" locale="pt-br" v-model="dataInicio"></v-date-picker>
+                <v-date-picker color="green lighten-1" locale="pt-br" v-model="atividade.dataInicio"></v-date-picker>
 
                 <div v-if="statusRevisao">
                     <span style="  font-weight: bold;">Data Revisão</span><br>
                     <v-date-picker id="dataRevisao" :rules="[rules.required]" color="green lighten-1" locale="pt-br"
-                        v-model="dataRevisao"></v-date-picker>
+                        v-model="atividade.dataRevisao"></v-date-picker>
                 </div>
 
                 <div v-if="statusFinalizacao">
                     <span style="  font-weight: bold;">Data Finalização</span><br>
                     <v-date-picker id="dataFinalizacao" :rules="[rules.required]" color="green lighten-1" locale="pt-br"
-                        v-model="dataFinalizacao"></v-date-picker>
+                        v-model="atividade.dataFinalizacao"></v-date-picker>
                 </div>
                 <br>
                 <v-btn dark color="green" class="salvar" variant="text" @click="salvar()">
@@ -60,8 +59,7 @@
                     <v-list>
                         <v-list-item v-for="(item, index) in status" :key="index"
                             v-if="item.idStatus != atividade.idStatus">
-                            <v-btn v-bind:color="item.color" variant="text"
-                                @click="mudarStatus(item.idStatus, item.tipo)">
+                            <v-btn v-bind:color="item.color" variant="text" @click="mudarStatus(item.idStatus, item.tipo)">
                                 <span style="font-weight: bold;">
                                     {{ item.tipo }}
                                 </span>
@@ -75,84 +73,6 @@
     </div>
 </template>
 
-<!-- <template>
-    <v-row justify="center">
-        <v-dialog v-model="dialog.aberto" width="600">
-
-            <div class="container">
-                <v-btn dark color="red" small class="fechar" variant="text" @click="abrir(false)">
-                    <v-icon dark>
-                        mdi-close
-                    </v-icon>Fechar
-                </v-btn>
-                <div class="texto">
-                    <h3 v-if="!this.verificaEdicao">
-                        Adicionando Atividade no Quadro
-                    </h3>
-                    <h3 v-else>
-                        Editando Atividade id: {{ dialog.id }}
-                        <br>{{ titulo }}
-                    </h3>
-                </div>
-                <br><br>
-                
-                <v-form>
-                    <v-text-field class="input" :rules="[rules.required]" id="titulo" v-model="titulo" label="Título"
-                        outlined></v-text-field>
-                    <v-text-field class="input" :rules="[rules.required]" id="descricao" v-model="descricao"
-                        label="Descrição" outlined></v-text-field>
-                    <v-textarea class="input" v-model="subTarefas" label="Sub-Taferas" outlined></v-textarea>
-                    <v-textarea class="input" v-model="comentario" label="Comentários" outlined></v-textarea>
-
-                    <span style="  font-weight: bold;">Data Inicialização</span><br>
-                    <v-date-picker color="green lighten-1" locale="pt-br" v-model="dataInicio"></v-date-picker>
-
-                    <div v-if="statusRevisao">
-                        <span style="  font-weight: bold;">Data Revisão</span><br>
-                        <v-date-picker id="dataRevisao" :rules="[rules.required]" color="green lighten-1" locale="pt-br"
-                            v-model="dataRevisao"></v-date-picker>
-                    </div>
-
-                    <div v-if="statusFinalizacao">
-                        <span style="  font-weight: bold;">Data Finalização</span><br>
-                        <v-date-picker id="dataFinalizacao" :rules="[rules.required]" color="green lighten-1" locale="pt-br"
-                            v-model="dataFinalizacao"></v-date-picker>
-                    </div>
-                    <br>
-                    <v-btn dark color="green" class="salvar" variant="text" @click="salvar()">
-                        <v-icon>
-                            mdi-content-save
-                        </v-icon>
-                        Salvar
-                    </v-btn>
-
-                    <v-menu v-if="this.atividade.idStatus < 6" top :offset-x="offset">
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-btn dark color="black" class="mudarStatus" v-bind="attrs" v-on="on">
-                                Mudar Status
-                                <v-icon>
-                                    mdi-arrow-right-bold
-                                </v-icon>
-                            </v-btn>
-                        </template>
-                        <v-list>
-                            <v-list-item v-for="(item, index) in status" :key="index"
-                                v-if="item.idStatus != atividade.idStatus">
-                                <v-btn v-bind:color="item.color" variant="text"
-                                    @click="mudarStatus(item.idStatus, item.tipo)">
-                                    <span style="font-weight: bold;">
-                                        {{ item.tipo }}
-                                    </span>
-                                </v-btn>
-                            </v-list-item>
-                        </v-list>
-                    </v-menu>
-
-                </v-form>
-            </div>
-        </v-dialog>
-    </v-row>
-</template> -->
 <script>
 
 export default {
@@ -160,12 +80,6 @@ export default {
     data: () => ({
         aberto: false,
         atividade: {},
-        titulo: null,
-        descricao: null,
-        dataInicio: null,
-        subTarefas: null,
-        comentario: null,
-        dataRevisao: null,
         statusRevisao: false,
         dataFinalizacao: null,
         statusFinalizacao: false,
@@ -209,20 +123,15 @@ export default {
             this.dialog.aberto = verificacao
         },
         salvar() {
-            if (!this.titulo || !this.descricao ) {
-                if (!this.titulo) {
+            if (!this.atividade.titulo || !this.atividade.descricao) {
+                if (!this.atividade.titulo) {
                     document.getElementById("titulo").focus();
                 } else {
                     document.getElementById("descricao").focus();
                 }
             }
             else {
-                var salvar = new Object();
-                salvar.titulo = this.titulo
-                salvar.descricao = this.descricao
-                salvar.dataInicio = this.dataInicio
-                salvar.subTarefas = this.subTarefas
-                salvar.comentario = this.comentario
+                var salvar = this.atividade;
                 if (!this.verificaEdicao) {
                     salvar.idStatus = 1
                     salvar.status = "Backlog"
@@ -243,7 +152,6 @@ export default {
         async adicionarAtividade(atividade) {
             const reqs = await fetch("  http://localhost:3000/atividades");
             const atividades = await reqs.json();
-            atividade.id = atividades.at(-1).id + 1
 
             const dataJson = JSON.stringify(atividade);
             const req = await fetch("http://localhost:3000/atividades", {
@@ -351,10 +259,10 @@ export default {
         },
         verficandoEdicao() {
             console.log(this.dialog.id)
-            // if (!this.open) {
-            //     this.dialog.id = 0
+            if (!this.open) {
+                this.dialog.id = 0
 
-            // }
+            }
             if (this.dialog.id == 0) {
                 this.verificaEdicao = false
                 this.titulo = ""
@@ -471,4 +379,5 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-}</style>
+}
+</style>

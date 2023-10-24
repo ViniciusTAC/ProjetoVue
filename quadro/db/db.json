@@ -189,30 +189,6 @@
       "dataFinalizacao": null
     },
     {
-      "titulo": "asdfastaessdfa",
-      "descricao": "asdfasdf a",
-      "dataInicio": "2023-10-19",
-      "subTarefas": null,
-      "comentario": null,
-      "idStatus": 6,
-      "status": "Prontas",
-      "id": 14,
-      "dataRevisao": "2023-10-19",
-      "dataFinalizacao": "2023-10-19"
-    },
-    {
-      "titulo": "teste",
-      "descricao": "teste",
-      "dataInicio": "2023-10-20",
-      "subTarefas": null,
-      "comentario": null,
-      "idStatus": 6,
-      "status": "Prontas",
-      "id": 15,
-      "dataRevisao": "2023-10-24",
-      "dataFinalizacao": "2023-10-20"
-    },
-    {
       "titulo": "Teste de adicionar atividade",
       "descricao": "Descrição qualquer",
       "dataInicio": "2023-10-20",
