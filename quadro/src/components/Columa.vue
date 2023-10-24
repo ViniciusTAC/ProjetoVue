@@ -2,10 +2,12 @@
     <div data-app>
         <div>
             <br>
-            <Atividades :dialog="dialog" />
+
             <v-col v-for="(item, index) in atividades.filter(
                 (atv) => atv.idStatus == items.idStatus
-            )" :key="index" @click="abrirDialog(true, item.id)">
+            )" :key="index" @click="showModal(`atividade/:id`)">
+                <Atividades :open="open" @close="open = false">
+                </Atividades>
                 <Card :item=item />
                 <!-- <v-card class="card">
                     Título: {{ item.titulo }} <br />Descrição: {{ item.descricao }}
@@ -31,6 +33,8 @@ export default {
                 aberto: false,
                 id: 0,
             },
+
+            open: false
         };
     },
     methods: {
@@ -58,6 +62,11 @@ export default {
             this.dialog.id = id;
             this.dialog.aberto = verificacao;
         },
+        showModal(name) {
+            
+            // this.$router.push(name).catch(() => { })
+            // console.log(this.$router)
+        }
     },
     created() {
 

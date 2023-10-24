@@ -4,14 +4,23 @@
       <h1>Quadro de atividades</h1>
       <div>
         <div class="add">
+          <v-btn color="primary" @click="showModal('criar_atividade')">
+            Adicionar Atividade
+          </v-btn>
+          <Atividades :open="open" @close="open = false">
+          </Atividades>
+        </div>
+
+
+        <!-- <div class="add">
           <v-btn slot="activator" color="primary" @click="abrirDialog(true, dialog.id)">
             Adicionar Atividades
           </v-btn>
           <Atividades :dialog="dialog" />
-        </div>
+        </div> -->
       </div>
       <br />
-        <Titulo />
+      <Titulo />
 
 
 
@@ -52,6 +61,20 @@ export default {
         aberto: false,
         id: 0,
       },
+
+
+      open: false,
+      modalContents: {
+        criar_atividade: {
+          title: 'This Is Information',
+          content: 'Info To Be Passed to The User'
+        },
+        "atividade=id": {
+          title: 'Success!',
+          content: 'Request Completed'
+        }
+      },
+      currentModal: 'info'
     };
   },
   methods: {
@@ -78,12 +101,44 @@ export default {
       }
     },
     abrirDialog(verificacao, id) {
+      console.log('1',this.dialog)
       this.dialog.id = id;
       this.dialog.aberto = verificacao;
+      console.log('2',this.dialog)
     },
+
+    checkModal() {
+      if (this.$route.params.modal && this.modalContents[this.$route.params.modal]) {
+        this.open = true;
+        this.currentModal = this.$route.params.modal
+      } else {
+        this.open= false;
+
+      }
+    },
+    showModal(name) {
+         this.$router.push(name).catch(() => { })
+    }
+  },
+  created() {
+    this.checkModal();
+    this.getDados();
+
   },
   mounted() {
-    this.getDados();
+
+  },
+  watch: {
+    $route(to, from) {
+      this.checkModal();
+    },
+    open(to, from) {
+      if (to == false) {
+        if (this.$route.params.modal) {
+          this.$router.push('/')
+        }
+      }
+    }
   },
 };
 </script>

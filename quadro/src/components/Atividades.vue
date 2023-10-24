@@ -1,4 +1,81 @@
 <template>
+    <div :class="{ 'open': open }" class="modal">
+        <div class="container">
+          
+            <v-btn dark color="red" small class="fechar" variant="text"  @click="$emit('close')">
+                <v-icon dark>
+                    mdi-close
+                </v-icon>Fechar
+            </v-btn>
+            <div class="texto">
+                <h3 v-if="!this.verificaEdicao">
+                    Adicionando Atividade no Quadro
+                </h3>
+                <h3 v-else>
+                    Editando Atividade id: {{ dialog.id }}
+                    <br>{{ titulo }}
+                </h3>
+            </div>
+            <br><br>
+            
+            <v-form>
+                <v-text-field class="input" :rules="[rules.required]" id="titulo" v-model="titulo" label="Título"
+                    outlined></v-text-field>
+                <v-text-field class="input" :rules="[rules.required]" id="descricao" v-model="descricao"
+                    label="Descrição" outlined></v-text-field>
+                <v-textarea class="input" v-model="subTarefas" label="Sub-Taferas" outlined></v-textarea>
+                <v-textarea class="input" v-model="comentario" label="Comentários" outlined></v-textarea>
+
+                <span style="  font-weight: bold;">Data Inicialização</span><br>
+                <v-date-picker color="green lighten-1" locale="pt-br" v-model="dataInicio"></v-date-picker>
+
+                <div v-if="statusRevisao">
+                    <span style="  font-weight: bold;">Data Revisão</span><br>
+                    <v-date-picker id="dataRevisao" :rules="[rules.required]" color="green lighten-1" locale="pt-br"
+                        v-model="dataRevisao"></v-date-picker>
+                </div>
+
+                <div v-if="statusFinalizacao">
+                    <span style="  font-weight: bold;">Data Finalização</span><br>
+                    <v-date-picker id="dataFinalizacao" :rules="[rules.required]" color="green lighten-1" locale="pt-br"
+                        v-model="dataFinalizacao"></v-date-picker>
+                </div>
+                <br>
+                <v-btn dark color="green" class="salvar" variant="text" @click="salvar()">
+                    <v-icon>
+                        mdi-content-save
+                    </v-icon>
+                    Salvar
+                </v-btn>
+
+                <v-menu v-if="this.atividade.idStatus < 6" top :offset-x="offset">
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn dark color="black" class="mudarStatus" v-bind="attrs" v-on="on">
+                            Mudar Status
+                            <v-icon>
+                                mdi-arrow-right-bold
+                            </v-icon>
+                        </v-btn>
+                    </template>
+                    <v-list>
+                        <v-list-item v-for="(item, index) in status" :key="index"
+                            v-if="item.idStatus != atividade.idStatus">
+                            <v-btn v-bind:color="item.color" variant="text"
+                                @click="mudarStatus(item.idStatus, item.tipo)">
+                                <span style="font-weight: bold;">
+                                    {{ item.tipo }}
+                                </span>
+                            </v-btn>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
+
+            </v-form>
+        </div>
+    </div>
+</template>
+
+<!-- <template>
     <v-row justify="center">
         <v-dialog v-model="dialog.aberto" width="600">
 
@@ -75,11 +152,11 @@
             </div>
         </v-dialog>
     </v-row>
-</template>
+</template> -->
 <script>
 
 export default {
-    props: ["dialog"],
+    props: ["open"],
     data: () => ({
         aberto: false,
         atividade: {},
@@ -127,13 +204,13 @@ export default {
             const status = await req.json();
             this.status = status
         },
-        
+
         abrir(verificacao) {
             this.dialog.aberto = verificacao
         },
         salvar() {
-            if (this.titulo.length == 0 || this.descricao.length == 0) {
-                if (this.titulo.length == 0) {
+            if (!this.titulo || !this.descricao ) {
+                if (!this.titulo) {
                     document.getElementById("titulo").focus();
                 } else {
                     document.getElementById("descricao").focus();
@@ -160,7 +237,7 @@ export default {
                     }
                     this.atualizarAtividade(salvar)
                 }
-                this.abrir(false)
+                this.$emit('close')
             }
         },
         async adicionarAtividade(atividade) {
@@ -273,10 +350,11 @@ export default {
             this.dialog.aberto = false
         },
         verficandoEdicao() {
-            if (!this.dialog.aberto) {
-                this.dialog.id = 0
+            console.log(this.dialog.id)
+            // if (!this.open) {
+            //     this.dialog.id = 0
 
-            }
+            // }
             if (this.dialog.id == 0) {
                 this.verificaEdicao = false
                 this.titulo = ""
@@ -307,30 +385,90 @@ export default {
 .container {
     background-color: white;
     padding: auto;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
 }
+
 .botao {
     float: right;
     margin: auto;
 }
+
 .fechar {
     float: right;
 }
+
 .texto {
     width: 75%;
     text-align: center;
 }
+
 .input {
     padding-top: 5px;
     margin: 5px;
     max-width: 95%;
 }
+
 .salvar {
     background-color: rgb(0, 0, 0);
     margin-bottom: 15px;
 }
+
 .mudarStatus {
     background-color: rgb(0, 0, 0);
     margin-left: 15px;
     margin-bottom: 15px;
 }
-</style>
+
+
+
+.modal {
+    z-index: 99;
+    background-color: #ffffff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    width: 55vw;
+    height: 100%;
+    border-radius: 6px;
+    transition-property: top;
+    transition-duration: 900ms;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.modal:not(.open) {
+    display: none;
+}
+
+.modal.open {
+    animation: fadeup 250ms;
+}
+
+@keyframes fadeup {
+    from {
+        opacity: 0;
+        top: 53%;
+    }
+
+    to {
+        opacity: 1;
+        top: 50%;
+    }
+}
+
+.modal .actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}</style>

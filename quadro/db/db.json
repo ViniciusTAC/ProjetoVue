@@ -221,18 +221,6 @@
       "idStatus": 1,
       "status": "Backlog",
       "id": 16
-    },
-    {
-      "titulo": "teste qual",
-      "descricao": "asdf asdf a",
-      "dataInicio": "2023-10-20",
-      "subTarefas": "asdfas dfa",
-      "comentario": "asdfasdf",
-      "idStatus": 5,
-      "status": "Revisando",
-      "id": 17,
-      "dataRevisao": "2023-10-23",
-      "dataFinalizacao": null
     }
   ]
 }
