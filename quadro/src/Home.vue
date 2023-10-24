@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <h1>Quadro de atividades</h1>
+      <h1 style="color: black;">Quadro de atividades</h1>
       <div>
         <div class="add">
           <v-btn color="primary" @click="showModal('criar_atividade')">
@@ -11,7 +11,6 @@
           </Atividades>
         </div>
       </div>
-      <br />
       <Titulo />
     </v-app>
   </div>
