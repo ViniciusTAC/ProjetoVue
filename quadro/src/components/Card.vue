@@ -1,9 +1,9 @@
 <template>
     <div data-app>
-        <v-card class="card" @click="showModal(item.id)">
+        <v-card class="card" @click="adicionaRota(item.id)">
             Título: {{ item.titulo }} <br />Descrição: {{ item.descricao }}
         </v-card>
-        <Atividade :open="open" @close="open = false">
+        <Atividade :aberto="aberto" @close="aberto = false">
         </Atividade>
     </div>
 </template>
@@ -19,19 +19,20 @@ export default {
     },
     data() {
         return {
-            open: false,
+            aberto: false,
         };
     },
     methods: {
-        checkModal() {
+        verificaModal() {
             if (this.$route.name == 'EditarAtividade') {
-                this.open = true;
+                this.aberto = true;
+                
             } else {
-                this.open = false;
+                this.aberto = false;
             }
 
         },
-        showModal(id) {
+        adicionaRota(id) {
             this.$router.push({
                 name: 'EditarAtividade', params: {
                     id: id
@@ -46,9 +47,17 @@ export default {
     },
     watch: {
         $route(to, from) {
-            this.checkModal();
+            if (this.item.id == this.$route.params.id) {
+                this.verificaModal();
+            }
+            else{
+                console.log('repetiu a mais')
+            }
+            // this.teste = this.teste + 1
+            // console.log('2',this.item.id)
+            // this.verificaModal();
         },
-        open(to, from) {
+        aberto(to, from) {
             if (to == false) {
                 this.$router.push('/').catch(() => { })
             }

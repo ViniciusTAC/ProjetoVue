@@ -46,13 +46,13 @@
     },
     {
       "id": 2,
-      "titulo": "Teste 11-12-2023",
-      "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
-      "dataInicio": "2023-10-11",
+      "titulo": "Teste de adicionar atividade",
+      "descricao": "Descrição qualquer",
+      "dataInicio": "2023-10-20",
       "dataFinalizacao": null,
       "dataRevisao": null,
-      "comentario": "In dolor cumque At adipisci saepe sit doloribus consequatur qui architecto voluptatibus non quia distinctio aut enim nostrum nam culpa harum. ",
-      "subTarefas": "Revisar, Testar, corrigir",
+      "comentario": "teste de comentario",
+      "subTarefas": "teste de subtarefa",
       "status": "Backlog",
       "idStatus": 1
     },
@@ -118,7 +118,7 @@
     },
     {
       "id": 8,
-      "titulo": "Rotacionar layout",
+      "titulo": "Rotacionação layout",
       "descricao": "Lorem ipsum dolor sit amet. Rem blanditiis voluptas sed saepe placeat At unde fugit non odit enim et deleniti unde.",
       "dataInicio": "2023-10-11",
       "dataFinalizacao": null,

@@ -2,8 +2,8 @@
     <div data-app>
         <div>
             <v-col v-for="(item, index) in atividades.filter(
-                (atv) => atv.idStatus == items.idStatus
-            )" :key="index"  >
+                (atv) => atv.idStatus == status.idStatus
+            )" :key="index">
                 <Card :item=item />
             </v-col>
         </div>
@@ -13,18 +13,13 @@
 <script>
 import Card from "./Card.vue";
 export default {
-    props: ["items"],
+    props: ["status"],
     components: {
         Card,
     },
     data() {
         return {
-            status: [],
             atividades: [],
-            dialog: {
-                aberto: false,
-                id: 0,
-            },
         };
     },
     methods: {
@@ -55,8 +50,5 @@ export default {
 </script>
   
   
-<style scoped>
-
-
-</style>
+<style scoped></style>
   

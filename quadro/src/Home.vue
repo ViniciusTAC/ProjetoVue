@@ -4,15 +4,15 @@
       <h1 style="color: black;">Quadro de atividades</h1>
       <div>
         <div class="add">
-         
           <v-btn color="primary" @click="showModal()">
             Adicionar Atividade
           </v-btn>
-          <Atividade :open="open" @close="open = false">
-          </Atividade>
+          <Atividade :open="open" @close="open = false" />
         </div>
       </div>
       <Titulo />
+      <!-- <router-view></router-view> -->
+
     </v-app>
   </div>
 </template>
@@ -33,15 +33,11 @@ export default {
       },
 
       open: false,
-      modalContents: {
-        criar_atividade: {
-        }
-      },
     };
   },
   methods: {
     checkModal() {
-      if (this.$route.name == 'CriarAtividade') {
+      if (this.$route.name == 'CriarAtividade' || this.$route.name == 'EditarAtividade') {
         this.open = true;
       } else {
         this.open = false;

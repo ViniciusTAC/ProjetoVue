@@ -6,7 +6,7 @@
           <v-card v-bind:color="items.color" class="titulo">{{
             items.tipo
           }}</v-card>
-          <Coluna :items="items" />
+          <Coluna :status="items" />
         </v-col>
       </v-row>
     </v-container>
