@@ -1,7 +1,7 @@
 <template>
     <div data-app>
-        <v-card class="card" @click="adicionaRota(item.id)">
-            Título: {{ item.titulo }} <br />Descrição: {{ item.descricao }}
+        <v-card class="card" @click="adicionaRota(itemFiltrado.id)">
+            Título: {{ itemFiltrado.titulo }} <br />Descrição: {{ itemFiltrado.descricao }}
         </v-card>
         <Atividade :aberto="aberto" @close="aberto = false">
         </Atividade>
@@ -11,9 +11,8 @@
 <script>
 import Atividade from "./Atividade.vue";
 import Coluna from "./Columa.vue";
-
 export default {
-    props: ["item"],
+    props: ["itemFiltrado"],
     components: {
         Atividade, Coluna,
     },
@@ -26,7 +25,7 @@ export default {
         verificaModal() {
             if (this.$route.name == 'EditarAtividade') {
                 this.aberto = true;
-                
+
             } else {
                 this.aberto = false;
             }
@@ -47,10 +46,10 @@ export default {
     },
     watch: {
         $route(to, from) {
-            if (this.item.id == this.$route.params.id) {
+            if (this.itemFiltrado.id == this.$route.params.id) {
                 this.verificaModal();
             }
-            else{
+            else {
                 console.log('repetiu a mais')
             }
             // this.teste = this.teste + 1

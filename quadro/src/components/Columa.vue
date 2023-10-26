@@ -4,7 +4,7 @@
             <v-col v-for="(item, index) in atividades.filter(
                 (atv) => atv.idStatus == status.idStatus
             )" :key="index">
-                <Card :item=item />
+                <Card :itemFiltrado=item />
             </v-col>
         </div>
     </div>

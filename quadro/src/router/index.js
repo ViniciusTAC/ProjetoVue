@@ -11,7 +11,7 @@ const routes = [
     component: Home,
     children: [
       {
-        name:'CriarAtividade',
+        name: 'CriarAtividade',
         path: 'criar_atividade',
         component: () => import('../components/Atividade.vue')
       },

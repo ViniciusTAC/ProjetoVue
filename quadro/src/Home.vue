@@ -7,12 +7,11 @@
           <v-btn color="primary" @click="showModal()">
             Adicionar Atividade
           </v-btn>
-          <Atividade :open="open" @close="open = false" />
+          <Atividade :aberto="aberto" @close="aberto = false" />
         </div>
       </div>
       <Titulo />
       <!-- <router-view></router-view> -->
-
     </v-app>
   </div>
 </template>
@@ -27,20 +26,15 @@ export default {
   },
   data() {
     return {
-      dialog: {
-        aberto: false,
-        id: 0,
-      },
-
-      open: false,
+      aberto: false,
     };
   },
   methods: {
     checkModal() {
       if (this.$route.name == 'CriarAtividade' || this.$route.name == 'EditarAtividade') {
-        this.open = true;
+        this.aberto = true;
       } else {
-        this.open = false;
+        this.aberto = false;
       }
 
     },
@@ -61,7 +55,7 @@ export default {
     $route(to, from) {
       this.checkModal();
     },
-    open(to, from) {
+    aberto(to, from) {
       if (to == false) {
         this.$router.push('/').catch(() => { })
       }

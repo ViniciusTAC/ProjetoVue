@@ -1,5 +1,5 @@
 <template>
-    <div :class="{ 'open': open }" class="modal">
+    <div :class="{ 'aberto': aberto }" class="modal">
         <div class="container">
             <v-btn dark color="red" small class="fechar" variant="text" @click="$emit('close')">
                 <v-icon dark>
@@ -76,9 +76,8 @@
 <script>
 
 export default {
-    props: ["open"],
+    props: ["aberto"],
     data: () => ({
-        aberto: false,
         atividade: {},
         statusRevisao: false,
         dataFinalizacao: null,
@@ -137,7 +136,7 @@ export default {
                         salvar.dataRevisao = this.dataRevisao
                         salvar.dataFinalizacao = this.dataFinalizacao
                     }
-                    
+
                     this.atualizarAtividade(salvar)
                 }
                 this.$emit('close')
@@ -254,7 +253,7 @@ export default {
         verficandoEdicao() {
             // console.log(this.$route.params.id != undefined)
             if (this.$route.params.id != undefined) {
-               
+
 
             }
             if (this.$route.params.id == undefined) {
@@ -270,7 +269,7 @@ export default {
         },
     },
     watch: {
-        open: {
+        aberto: {
             handler: function () {
                 this.verficandoEdicao()
             },
@@ -324,7 +323,7 @@ export default {
 .modal {
     z-index: 99;
     background-color: #ffffff;
-    
+
     position: fixed;
     top: 50%;
     left: 50%;
@@ -340,11 +339,11 @@ export default {
     -webkit-overflow-scrolling: touch;
 }
 
-.modal:not(.open) {
+.modal:not(.aberto) {
     display: none;
 }
 
-.modal.open {
+.modal.aberto {
     animation: fadeup 250ms;
 }
 
