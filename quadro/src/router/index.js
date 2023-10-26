@@ -9,12 +9,16 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home,
-    params: {
-      id: 0
-    },
     children: [
       {
-        path:':modal'
+        name:'CriarAtividade',
+        path: 'criar_atividade',
+        component: () => import('../components/Atividade.vue')
+      },
+      {
+        name: 'EditarAtividade',
+        path: "editar_atividade/:id",
+        component: () => import('../components/Atividade.vue')
       }
     ]
   },

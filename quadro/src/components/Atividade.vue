@@ -11,8 +11,8 @@
                     Adicionando Atividade no Quadro
                 </h3>
                 <h3 v-else>
-                    Editando Atividade id: {{ dialog.id }}
-                    <br>{{ titulo }}
+                    Editando Atividade id: {{ $route.params.id }}
+                    <br>{{ atividade.titulo }}
                 </h3>
             </div>
             <br><br>
@@ -94,16 +94,9 @@ export default {
     methods: {
         async getDados() {
 
-            const req = await fetch("  http://localhost:3000/atividades?id=" + this.dialog.id);
+            const req = await fetch("  http://localhost:3000/atividades?id=" + this.$route.params.id);
             const atividades = await req.json();
             this.atividade = atividades[0]
-            this.titulo = this.atividade.titulo
-            this.descricao = this.atividade.descricao
-            this.dataInicio = this.atividade.dataInicio
-            this.dataRevisao = this.atividade.dataRevisao
-            this.dataFinalizacao = this.atividade.dataFinalizacao
-            this.subTarefas = this.atividade.subTarefas
-            this.comentario = this.atividade.comentario
             if (this.atividade.idStatus == 5) {
                 this.statusRevisao = true
             }
@@ -137,13 +130,14 @@ export default {
                     salvar.status = "Backlog"
                     this.adicionarAtividade(salvar)
                 } else {
-                    if (this.atividade.idStatus = 5) {
+                    if (this.atividade.idStatus == 5) {
                         salvar.dataRevisao = this.dataRevisao
                     }
-                    if (this.atividade.idStatus = 6) {
+                    if (this.atividade.idStatus == 6) {
                         salvar.dataRevisao = this.dataRevisao
                         salvar.dataFinalizacao = this.dataFinalizacao
                     }
+                    
                     this.atualizarAtividade(salvar)
                 }
                 this.$emit('close')
@@ -172,7 +166,7 @@ export default {
         },
         async atualizarAtividade(atividade) {
             const dataJson = JSON.stringify(atividade);
-            const res = await fetch('http://localhost:3000/atividades/' + this.dialog.id, {
+            const res = await fetch('http://localhost:3000/atividades/' + this.$route.params.id, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -235,7 +229,7 @@ export default {
                 }
 
             }
-            const res = await fetch('http://localhost:3000/atividades/' + this.dialog.id, {
+            const res = await fetch('http://localhost:3000/atividades/' + this.$route.params.id, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -255,21 +249,17 @@ export default {
                 location.reload()
             }, "2750");
 
-            this.dialog.aberto = false
+            this.$emit('close')
         },
         verficandoEdicao() {
-            console.log(this.dialog.id)
-            if (!this.open) {
-                this.dialog.id = 0
+            // console.log(this.$route.params.id != undefined)
+            if (this.$route.params.id != undefined) {
+               
 
             }
-            if (this.dialog.id == 0) {
+            if (this.$route.params.id == undefined) {
                 this.verificaEdicao = false
-                this.titulo = ""
-                this.descricao = ""
-                this.dataInicio = null
-                this.subTarefas = null
-                this.comentario = null
+                this.atividade = {}
 
             } else {
                 this.verificaEdicao = true
@@ -280,7 +270,7 @@ export default {
         },
     },
     watch: {
-        dialog: {
+        open: {
             handler: function () {
                 this.verficandoEdicao()
             },
@@ -334,7 +324,7 @@ export default {
 .modal {
     z-index: 99;
     background-color: #ffffff;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    
     position: fixed;
     top: 50%;
     left: 50%;

@@ -197,6 +197,15 @@
       "idStatus": 1,
       "status": "Backlog",
       "id": 16
+    },
+    {
+      "titulo": "batatas",
+      "descricao": "batatinhasss",
+      "idStatus": 2,
+      "status": "Priorizadas",
+      "id": 17,
+      "dataFinalizacao": null,
+      "dataRevisao": null
     }
   ]
 }

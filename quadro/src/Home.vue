@@ -4,11 +4,12 @@
       <h1 style="color: black;">Quadro de atividades</h1>
       <div>
         <div class="add">
-          <v-btn color="primary" @click="showModal('criar_atividade')">
+         
+          <v-btn color="primary" @click="showModal()">
             Adicionar Atividade
           </v-btn>
-          <Atividades :open="open" @close="open = false">
-          </Atividades>
+          <Atividade :open="open" @close="open = false">
+          </Atividade>
         </div>
       </div>
       <Titulo />
@@ -17,11 +18,11 @@
 </template>
 
 <script>
-import Atividades from "./components/Atividades.vue";
+import Atividade from "./components/Atividade.vue";
 import Titulo from "./components/Titulo.vue";
 export default {
   components: {
-    Atividades,
+    Atividade,
     Titulo,
   },
   data() {
@@ -40,15 +41,18 @@ export default {
   },
   methods: {
     checkModal() {
-      if (this.$route.params.modal && this.modalContents[this.$route.params.modal]) {
+      if (this.$route.name == 'CriarAtividade') {
         this.open = true;
-        this.currentModal = this.$route.params.modal
       } else {
         this.open = false;
       }
+
     },
-    showModal(name) {
-      this.$router.push(name).catch(() => { })
+    showModal() {
+      this.$router.push({
+        name: 'CriarAtividade'
+      }).catch(() => { })
+
     }
   },
   created() {
@@ -63,9 +67,7 @@ export default {
     },
     open(to, from) {
       if (to == false) {
-        if (this.$route.params.modal) {
-          this.$router.push('/')
-        }
+        this.$router.push('/').catch(() => { })
       }
     }
   },
