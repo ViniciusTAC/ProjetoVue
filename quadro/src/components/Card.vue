@@ -1,8 +1,16 @@
 <template>
     <div data-app>
-        <v-card class="card" @click="adicionaRota(itemFiltrado.id)">
-            Título: {{ itemFiltrado.titulo }} <br />Descrição: {{ itemFiltrado.descricao }}
-        </v-card>
+        <v-row>
+            <v-col v-for="(status) in listaDeStatus" :key="status.idStatus">
+                <v-col v-for="(atividade) in atividades.filter(
+                    (atv) => atv.idStatus == status.idStatus
+                )" :key="atividade.id">
+                    <v-card class="card" @click="adicionaRota(atividade.id)">
+                        Título: {{ atividade.titulo }} <br />Descrição: {{ atividade.descricao }}
+                    </v-card>
+                </v-col>
+            </v-col>
+        </v-row>
         <Atividade :aberto="aberto" @close="aberto = false">
         </Atividade>
     </div>
@@ -10,20 +18,44 @@
   
 <script>
 import Atividade from "./Atividade.vue";
-import Coluna from "./Columa.vue";
 export default {
-    props: ["itemFiltrado"],
+    props: [""],
     components: {
-        Atividade, Coluna,
+        Atividade,
     },
     data() {
         return {
+            listaDeStatus: [],
             aberto: false,
+            atividades: [],
+
         };
     },
     methods: {
+        async getStatus() {
+            const req = await fetch(" http://localhost:3000/status");
+            this.listaDeStatus = await req.json();
+
+        },
+        async getDados() {
+            const reqs = await fetch("  http://localhost:3000/atividades");
+            this.atividades = await reqs.json();
+
+            this.formataTexto();
+        },
+        formataTexto() {
+            for (let index = 0; index < this.atividades.length; index++) {
+                if (this.atividades[index].descricao.length > 60) {
+                    this.atividades[index].descricao = this.atividades[
+                        index
+                    ].descricao.slice(0, 64);
+                    this.atividades[index].descricao =
+                        this.atividades[index].descricao + "...";
+                }
+            }
+        },
         verificaModal() {
-            if (this.$route.name == 'EditarAtividade') {
+            if (this.$route.name == 'CriarAtividade' || this.$route.name == 'EditarAtividade') {
                 this.aberto = true;
 
             } else {
@@ -42,19 +74,12 @@ export default {
     created() {
     },
     mounted() {
-
+        this.getStatus();
+        this.getDados();
     },
     watch: {
         $route(to, from) {
-            if (this.itemFiltrado.id == this.$route.params.id) {
-                this.verificaModal();
-            }
-            else {
-                console.log('repetiu a mais')
-            }
-            // this.teste = this.teste + 1
-            // console.log('2',this.item.id)
-            // this.verificaModal();
+            this.verificaModal();
         },
         aberto(to, from) {
             if (to == false) {

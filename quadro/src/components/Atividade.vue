@@ -251,11 +251,6 @@ export default {
             this.$emit('close')
         },
         verficandoEdicao() {
-            // console.log(this.$route.params.id != undefined)
-            if (this.$route.params.id != undefined) {
-
-
-            }
             if (this.$route.params.id == undefined) {
                 this.verificaEdicao = false
                 this.atividade = {}
@@ -264,11 +259,15 @@ export default {
                 this.verificaEdicao = true
                 this.getDados()
                 this.getStatus()
-
+                this.statusRevisao = false
+                this.statusFinalizacao = false
             }
         },
     },
     watch: {
+        $route(to, from) {
+            this.verficandoEdicao()
+        },
         aberto: {
             handler: function () {
                 this.verficandoEdicao()

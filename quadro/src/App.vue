@@ -1,5 +1,22 @@
 <template>
   <div id="app">
+      <router-view></router-view>
+  </div>
+</template>
+
+<script>
+  export default {
+      name: 'app' 
+      
+  }
+</script>
+
+<style>
+</style>
+
+
+<!-- <template>
+  <div id="app">
     <v-app>
       <h1 style="color: black;">Quadro de atividades</h1>
       <div>
@@ -10,19 +27,19 @@
           <Atividade :aberto="aberto" @close="aberto = false" />
         </div>
       </div>
-      <Titulo />
-      <!-- <router-view></router-view> -->
+      <Coluna/>
+      <router-view></router-view>
     </v-app>
   </div>
 </template>
 
 <script>
 import Atividade from "./components/Atividade.vue";
-import Titulo from "./components/Titulo.vue";
+import Coluna from "./components/Coluna.vue";
 export default {
   components: {
     Atividade,
-    Titulo,
+    Coluna,
   },
   data() {
     return {
@@ -97,4 +114,4 @@ export default {
   text-overflow: ellipsis;
   cursor: pointer;
 }
-</style>
+</style> -->

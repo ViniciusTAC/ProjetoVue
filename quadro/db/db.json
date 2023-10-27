@@ -189,20 +189,22 @@
       "dataFinalizacao": null
     },
     {
-      "titulo": "Teste de adicionar atividade",
+      "titulo": "Teste de adicionar atividadesss",
       "descricao": "Descrição qualquer",
       "dataInicio": "2023-10-20",
       "subTarefas": "teste de subtarefa",
       "comentario": "teste de comentario",
-      "idStatus": 1,
-      "status": "Backlog",
-      "id": 16
+      "idStatus": 3,
+      "status": "A Fazer",
+      "id": 16,
+      "dataFinalizacao": null,
+      "dataRevisao": null
     },
     {
       "titulo": "batatas",
-      "descricao": "batatinhasss",
-      "idStatus": 2,
-      "status": "Priorizadas",
+      "descricao": "batatinhass",
+      "idStatus": 1,
+      "status": "Backlog",
       "id": 17,
       "dataFinalizacao": null,
       "dataRevisao": null

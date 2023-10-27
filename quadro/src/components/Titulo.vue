@@ -1,54 +1,46 @@
 <template>
   <div data-app>
-    <v-container class="quadro">
-      <v-row>
-        <v-col v-for="(items, index) in status" :key="index">
-          <v-card v-bind:color="items.color" class="titulo">{{
-            items.tipo
-          }}</v-card>
-          <Coluna :status="items" />
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-row>
+      <v-col v-for="(status) in listaDeStatus" :key="status.idStatus">
+        <v-card :color="status.color" class="titulo">{{
+          status.tipo
+        }}</v-card>
+      </v-col>
+    </v-row>
+
   </div>
 </template>
 
 <script>
-import Coluna from "./Columa.vue";
 export default {
+  name: 'ColumnTitle',
+  props: {
+    status: {
+      type: Object
+    }
+  },
   components: {
-    Coluna,
   },
   data() {
     return {
-      status: [],
-      atividades: [],
+      listaDeStatus: [],
     };
-  },
-  props: {
   },
   methods: {
     async getStatus() {
       const req = await fetch(" http://localhost:3000/status");
-      this.status = await req.json();
+      this.listaDeStatus = await req.json();
 
     },
+
   },
   created() {
-
-
   },
   mounted() {
     this.getStatus();
-
   },
 }
 </script>
 
 
-<style scoped>
-.quadro {
-  max-width: 2000px !important;
-  width: 150%;
-}
-</style>
+<style scoped></style>

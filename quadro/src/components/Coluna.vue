@@ -1,28 +1,33 @@
 <template>
     <div data-app>
-        <div>
-            <v-col v-for="(item, index) in atividades.filter(
-                (atv) => atv.idStatus == status.idStatus
-            )" :key="index">
-                <Card :itemFiltrado=item />
-            </v-col>
-        </div>
+        <v-container class="quadro">
+            <column-title />
+            <task-card />
+        </v-container>
     </div>
 </template>
   
 <script>
-import Card from "./Card.vue";
+import ColumnTitle from "./Titulo.vue";
+import TaskCard from "./Card.vue"
 export default {
-    props: ["status"],
+    name: 'ColunaNomeCertoAgora',
+    props: [""],
     components: {
-        Card,
+        ColumnTitle, TaskCard
     },
     data() {
         return {
-            atividades: [],
+            status: [],
+            tasks: [],
         };
     },
     methods: {
+        async getStatus() {
+            const req = await fetch(" http://localhost:3000/status");
+            this.status = await req.json();
+
+        },
         async getDados() {
             const reqs = await fetch("  http://localhost:3000/atividades");
             this.atividades = await reqs.json();
@@ -44,11 +49,13 @@ export default {
     created() {
     },
     mounted() {
+        this.getStatus();
         this.getDados();
     },
 }
 </script>
   
   
-<style scoped></style>
+<style scoped>
+</style>
   
