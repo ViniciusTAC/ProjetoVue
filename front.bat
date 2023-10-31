@@ -1,3 +1,2 @@
-cd quadro
-
+cd taskboard
 npm run serve

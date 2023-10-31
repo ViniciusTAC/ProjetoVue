@@ -1,2 +1,2 @@
-cd quadro
+cd taskboard
 npm run backend
