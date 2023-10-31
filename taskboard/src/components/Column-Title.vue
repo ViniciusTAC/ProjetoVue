@@ -4,8 +4,8 @@
 
         div v-for atividades.filter( status.idStatus)
             card -> detalhes da atividade -->
-        <v-card>
-            titulo
+        <v-card :color="status.color" class="title">
+            {{ status.tipo }}
         </v-card>
 
 
@@ -15,7 +15,11 @@
 <script>
 
 export default {
-    props: {},
+    props: {
+        status: {
+            type: Object
+        }
+    },
     components: {
     },
     name: 'Título',
@@ -24,4 +28,8 @@ export default {
 }
 </script>
   
-<style scoped></style>
+<style scoped>
+.title{
+    text-align: center;
+}
+</style>

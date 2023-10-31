@@ -8,7 +8,19 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
+    children: [
+      {
+        name: 'CriarAtividade',
+        path: 'criar_atividade',
+        component: () => import('../components/Task.vue')
+      },
+      {
+        name: 'EditarAtividade',
+        path: "editar_atividade/:id",
+        component: () => import('../components/Task.vue')
+      }
+    ]
   }
   // },
   // {

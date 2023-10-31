@@ -1,4 +1,77 @@
 {
-    "status": [],
-    "atividades": []
+  "status": [
+    {
+      "idStatus": 1,
+      "tipo": "Backlog",
+      "color": "#ea6e6b"
+    },
+    {
+      "idStatus": 2,
+      "tipo": "Priorizadas",
+      "color": "#bd3dbd"
+    },
+    {
+      "idStatus": 3,
+      "tipo": "A Fazer",
+      "color": "#7d7d7d"
+    },
+    {
+      "idStatus": 4,
+      "tipo": "Fazendo",
+      "color": "#799fd4"
+    },
+    {
+      "idStatus": 5,
+      "tipo": "Revisando",
+      "color": "#e08d6f"
+    },
+    {
+      "idStatus": 6,
+      "tipo": "Prontas",
+      "color": "#a6eca5"
+    }
+  ],
+  "atividades": [
+    {
+      "title": "Teste titulo",
+      "description": "Teste",
+      "id": 1,
+      "idStatus": 1
+    },
+    {
+      "title": "Teste titulo 2",
+      "description": "Teste titulo",
+      "idStatus": 1,
+      "id": 2
+    },
+    {
+      "title": "Teste titulo 3",
+      "idStatus": 1,
+      "id": 3
+    },
+    {
+      "title": "Teste titulo 4",
+      "description": "Teste",
+      "idStatus": 1,
+      "id": 4
+    },
+    {
+      "title": "Teste titulo 4",
+      "description": "Teste",
+      "idStatus": 1,
+      "id": 5
+    },
+    {
+      "title": "Teste titulo 5",
+      "description": "Teste",
+      "idStatus": 1,
+      "id": 6
+    },
+    {
+      "title": "Teste titulo 6",
+      "description": "Teste",
+      "idStatus": 1,
+      "id": 7
+    }
+  ]
 }
