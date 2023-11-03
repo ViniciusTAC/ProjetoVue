@@ -1,8 +1,11 @@
-<template>
+<template lang="pt-br">
   <div class="board">
-    <h1 class="title">
-      Quadro de Atividades
-    </h1>
+    <div class="title">
+      <span style="font-size: 30px;">
+        Quadro de Atividades
+      </span>
+    </div>
+    <br>
     <v-btn color="primary" dark @click="addRoute()">
       <v-icon>
         mdi-plus
@@ -31,7 +34,6 @@ export default {
       this.open = true
     },
     checkModal() {
-      //console.log('checkModal open:',this.open)
       if (this.$route.name == 'CriarAtividade' || this.$route.name == 'EditarAtividade') {
         this.open = true;
       } else {
@@ -54,20 +56,9 @@ export default {
   watch: {
     $route(to, from) {
 
-      
-      //console.log("teste")
       this.checkModal();
-      // if (this.$route.name == 'CriarAtividade') {
-      //   this.checkModal();
-      // }
-      // else {
-      //   this.checkModal();
-      // }
     },
     open(to, from) {
-      // if (from || to == false) {
-      //   console.log('from')
-      // }
       if (to == false) {
         this.$router.push('/').catch(() => { })
       }
@@ -83,6 +74,9 @@ export default {
 }
 
 .title {
+  width: 100%;
+
+  font-weight: bold;
   text-align: center;
 }
 </style>

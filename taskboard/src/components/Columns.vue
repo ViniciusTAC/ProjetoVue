@@ -1,7 +1,7 @@
 <template>
     <div class="columns">
         <v-row class="row">
-            <v-col no-gutters v-for="(status) in statusList" :key="status.idStatus">
+            <v-col no-gutters v-for="(status) in status_list" :key="status.idStatus">
                 <column :status="status" />
             </v-col>
         </v-row>
@@ -17,12 +17,12 @@ export default {
     },
     name: 'Colunas',
     data: () => ({
-        statusList: []
+        status_list: []
     }),
     methods: {
         async getStatus() {
             const req = await fetch("http://localhost:3000/status");
-            this.statusList = await req.json();
+            this.status_list = await req.json();
         }
     },
     created() {

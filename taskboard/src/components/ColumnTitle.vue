@@ -1,9 +1,5 @@
 <template>
     <div>
-        <!-- titulo :status = status -> somente o titulo da coluna! 
-
-        div v-for atividades.filter( status.idStatus)
-            card -> detalhes da atividade -->
         <v-card :color="status.color" class="title">
             {{ status.tipo }}
         </v-card>

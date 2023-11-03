@@ -33,6 +33,7 @@
                 <v-divider></v-divider>
 
                 <v-card-actions>
+
                     <v-spacer></v-spacer>
                     <v-btn color="sucess" dark @click="save()">
                         <v-icon>
@@ -41,6 +42,10 @@
                         Salvar
 
                     </v-btn>
+                    <div v-if="checkEdition" class="changeStatus"> 
+                        <change-task-status :task="task" /></div>
+
+
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -48,23 +53,26 @@
 </template>
   
 <script>
-
+import ChangeTaskStatus from "./Change-Task-Status.vue"
 export default {
     props: {
         open: {
-            type: Boolean
+            type: Boolean,
+            default: true
         }
     },
     components: {
+        ChangeTaskStatus
     },
     name: 'Atividade',
     data: () => ({
         task: {},
-        checkEdition: false
+        listStatus: [],
+        checkEdition: false,
     }),
     methods: {
         save() {
-            this.addTask()
+            this.checkEdition ? this.updatedTaks() : this.addTask()
         },
         async addTask() {
             this.task.idStatus = 1
@@ -76,14 +84,44 @@ export default {
             });
             this.$emit('close')
         },
-        async getData() {
+        async updatedTaks() {
+            const dataJson = JSON.stringify(this.task);
+            const res = await fetch('http://localhost:3000/atividades/' + this.$route.params.id, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: dataJson
+            })
+            this.$emit('close')
+        },
+        changeStatus(idStatus) {
+            var dados = {
+                idStatus: idStatus,
+            }
+            this.changeStatusUpdate(dados)
 
+        },
+        async changeStatusUpdate(dados) {
+            const res = await fetch('http://localhost:3000/atividades/' + this.$route.params.id, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados),
+            })
+            this.$emit('close')
+        },
+        async getData() {
             const req = await fetch("  http://localhost:3000/atividades?id=" + this.$route.params.id);
             const atividades = await req.json();
             this.task = atividades[0]
         },
+        async getStatus() {
+            const req = await fetch(" http://localhost:3000/status");
+            this.listStatus = await req.json();
+        },
         checkingEdit() {
-            //console.log("teste")
             if (this.$route.params.id == undefined) {
                 this.checkEdition = false
                 this.task = {}
@@ -91,20 +129,23 @@ export default {
             } else {
                 this.checkEdition = true
                 this.getData()
+                this.getStatus()
             }
         },
     },
     watch: {
         $route() {
-            //console.log(this.$route.params.id)
             this.checkingEdit()
         },
         open() {
-            //console.log("watch open", this.open)
             this.checkingEdit()
         }
     }
 }
 </script>
   
-<style scoped></style>
+<style scoped>
+.changeStatus {
+    margin-left: 15px;
+}
+</style>

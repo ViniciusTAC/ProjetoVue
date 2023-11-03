@@ -1,12 +1,7 @@
 <template>
     <div class="column">
-        <!-- titulo :status = status -> somente o titulo da coluna! 
-
-        div v-for atividades.filter( status.idStatus)
-            card -> detalhes da atividade -->
-
         <column-title :status="status" />
-        <div v-for="(task) in taskList.filter(
+        <div v-for="(task) in task_list.filter(
             (tsk) => tsk.idStatus == status.idStatus
         )" :key="task.id">
             <task-card :task="task" />
@@ -18,8 +13,8 @@
 </template>
   
 <script>
-import ColumnTitle from "./Column-Title.vue"
-import TaskCard from "./Task-Card.vue"
+import ColumnTitle from "./ColumnTitle.vue"
+import TaskCard from "./TaskCard.vue"
 export default {
     props: {
         status: {
@@ -32,12 +27,12 @@ export default {
     },
     name: 'Coluna',
     data: () => ({
-        taskList: [],
+        task_list: [],
     }),
     methods: {
         async getData() {
             const req = await fetch("http://localhost:3000/atividades");
-            this.taskList = await req.json();
+            this.task_list = await req.json();
         }
     },
     created() {
@@ -47,8 +42,6 @@ export default {
     },
     watch: {
         $route(to, from) {
-            //console.log("watch  $route", from)
-
             this.getData()
         },
     }

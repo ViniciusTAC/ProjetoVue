@@ -1,10 +1,5 @@
 <template>
     <div class="taskCard">
-        <!-- titulo :status = status -> somente o titulo da coluna! 
-
-        div v-for atividades.filter( status.idStatus)
-            card -> detalhes da atividade -->
-
         <v-card class="card" @click="addRoute(task.id)">
             Título: {{ task.title }}
             <br>

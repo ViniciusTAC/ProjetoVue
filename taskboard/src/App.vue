@@ -23,5 +23,4 @@ export default {
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 }
-
 </style>
