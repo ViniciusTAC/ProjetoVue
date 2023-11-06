@@ -1,62 +1,57 @@
 <template>
     <div>
-        <v-menu top offset-x>
-            <template v-slot:activator="{ on, attrs }">
-                <v-btn color="primary" dark v-bind="attrs" v-on="on">
-                    Mudar status
-                    <v-icon>
-                        mdi-arrow-right-bold
-                    </v-icon>
-                </v-btn>
+        <v-dialog v-model="open" width="500">
+            <template v-slot:activator="{ open }">
             </template>
 
-            <v-list>
-                <v-list-item v-for="(status) in listStatus" :key="status.idStatus" v-if="status.idStatus != task.idStatus">
-                    <v-btn v-bind:color="status.color" variant="text" @click="dialog = true">
-                        <span style="font-weight: bold;">
-                            {{ status.tipo }}
-                        </span>
+            <v-card>
+                <v-card-title class="text-h5 grey lighten-2">
+
+                    <span>
+                        Alterando para status <br>{{ status.tipo }}
+                    </span>
+                    <v-spacer></v-spacer>
+                    <v-btn color="error" dark @click="$emit('close')">
+                        <v-icon>
+                            mdi-close
+                        </v-icon>
+                        Fechar
                     </v-btn>
-                </v-list-item>
-            </v-list>
+                </v-card-title>
 
-            <div class="text-center">
-                <v-dialog v-model="dialog" width="500">
+                <br>
+                <v-card-text class="text-center">
+                    <v-alert v-if="verificationDate" type="error">Data obrigatória!</v-alert>
+                    <v-date-picker id="dateStatus" locale="pt-br" :color="status.color" v-model="date"></v-date-picker>
+                </v-card-text>
 
-                    
-                    <v-card>
-                        <v-card-title class="text-h5 grey lighten-2">
-                            Privacy Policy
-                        </v-card-title>
+                <v-divider></v-divider>
 
-                        <v-card-text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </v-card-text>
+                <v-card-actions>
 
-                        <v-divider></v-divider>
+                    <v-spacer></v-spacer>
+                    <v-btn color="sucess" dark @click="save()">
+                        <v-icon>
+                            mdi-content-save
+                        </v-icon>
+                        Salvar
 
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="primary" text @click="dialog = false">
-                                I accept
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-            </div>
-        </v-menu>
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </div>
 </template>
   
 <script>
 export default {
     props: {
-        task: {
-            type: Object
+        open: {
+            type: Boolean,
+            default: true
+        },
+        status: {
+            type: Object,
         }
     },
     components: {
@@ -64,42 +59,47 @@ export default {
     name: 'MudarStatusAtividade',
     data: () => ({
         listStatus: [],
-        dialog: false,
+        verificationDate: false,
+        date: null,
     }),
     methods: {
-        async getStatus() {
-            const req = await fetch(" http://localhost:3000/status");
-            this.listStatus = await req.json();
-        },
-        changeStatus(idStatus) {
-            var dados = {
-                idStatus: idStatus,
-            }
-            console.log(this.dialog)
-            this.dialog = true
+        save() {
 
+            if (this.date == null) {
+                this.verificationDate = true
+                document.getElementById("dateStatus").focus();
+            } else {
+                var dados = {
+                    idStatus: this.status.idStatus,
+                }
+                if (this.status.idStatus == 4) {
+                    dados.startDate = this.date
+                } else if (this.status.idStatus == 5) {
+                    dados.revisionDate = this.date
+                }
+                else {
+                    dados.endDate = this.date
+                }
+                this.changeStatusUpdate(dados)
+            }
         },
         async changeStatusUpdate(dados) {
-            // const res = await fetch('http://localhost:3000/atividades/' + this.$route.params.id, {
-            //     method: 'PATCH',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(dados),
-            // })
+            const res = await fetch('http://localhost:3000/atividades/' + this.$route.params.id, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados),
+            })
+            this.date = null
+            this.$emit('close')
         },
     },
     created() {
-        this.getStatus()
     },
     mounted() {
     },
     watch: {
-        open(to, from) {
-            if (to == false) {
-                this.$router.push('/').catch(() => { })
-            }
-        }
     }
 }
 </script>

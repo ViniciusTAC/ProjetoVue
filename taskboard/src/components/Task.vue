@@ -28,6 +28,21 @@
                     <v-text-field label="Descrição" outlined v-model="task.description"></v-text-field>
                     <v-textarea outlined name="input-7-2" label="SubTarefas" v-model="task.subtasks"></v-textarea>
                     <v-textarea outlined name="input-7-2" label="Comentário" v-model="task.comment"></v-textarea>
+                    <div v-if="checkEdition" class="text-center">
+                        <div>
+                            <span style="  font-weight: bold;font-size: large;">Data Início</span><br>
+                            <v-date-picker v-if="checkEdition" locale="pt-br" v-model="task.startDate"></v-date-picker>
+                        </div>
+
+                        <div>
+                            <span style="  font-weight: bold;font-size: large;">Data Revisão</span><br>
+                            <v-date-picker v-if="checkEdition" locale="pt-br" v-model="task.revisionDate"></v-date-picker>
+                        </div>
+                        <div>
+                            <span style="  font-weight: bold;font-size: large;">Data Finalização</span><br>
+                            <v-date-picker v-if="checkEdition" locale="pt-br" v-model="task.endDate"></v-date-picker>
+                        </div>
+                    </div>
                 </v-card-text>
 
                 <v-divider></v-divider>
@@ -42,10 +57,29 @@
                         Salvar
 
                     </v-btn>
-                    <div v-if="checkEdition" class="changeStatus"> 
-                        <change-task-status :task="task" /></div>
-
-
+                    <div v-if="checkEdition" class="changeStatus">
+                        <v-menu top offset-x>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn color="primary" dark v-bind="attrs" v-on="on">
+                                    Mudar status
+                                    <v-icon>
+                                        mdi-arrow-right-bold
+                                    </v-icon>
+                                </v-btn>
+                            </template>
+                            <v-list>
+                                <v-list-item v-for="(status) in listStatus" :key="status.idStatus"
+                                    v-if="status.idStatus != task.idStatus">
+                                    <v-btn v-bind:color="status.color" variant="text" @click="changeStatus(status)">
+                                        <span style="font-weight: bold;">
+                                            {{ status.tipo }}
+                                        </span>
+                                    </v-btn>
+                                </v-list-item>
+                            </v-list>
+                        </v-menu>
+                        <change-task-status :open="openChange" :status="dataChangeStatus" @close="openChange = false" />
+                    </div>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -69,6 +103,8 @@ export default {
         task: {},
         listStatus: [],
         checkEdition: false,
+        openChange: false,
+        dataChangeStatus: {}
     }),
     methods: {
         save() {
@@ -95,20 +131,26 @@ export default {
             })
             this.$emit('close')
         },
-        changeStatus(idStatus) {
-            var dados = {
-                idStatus: idStatus,
+        changeStatus(status) {
+            var data = status
+            if (data.idStatus >= 5 || data.idStatus == 4) {
+                this.openChange = true
+                this.dataChangeStatus = data
+            } else {
+                var dada = {
+                    idStatus: data.idStatus
+                }
+                this.changeStatusUpdate(dada)
             }
-            this.changeStatusUpdate(dados)
 
         },
-        async changeStatusUpdate(dados) {
+        async changeStatusUpdate(data) {
             const res = await fetch('http://localhost:3000/atividades/' + this.$route.params.id, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(dados),
+                body: JSON.stringify(data),
             })
             this.$emit('close')
         },
@@ -139,6 +181,11 @@ export default {
         },
         open() {
             this.checkingEdit()
+        },
+        openChange() {
+            if (!this.openChange) {
+                this.$emit('close')
+            }
         }
     }
 }

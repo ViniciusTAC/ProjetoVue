@@ -41,8 +41,10 @@
     {
       "title": "Teste titulo 2",
       "description": "Teste titulo",
-      "idStatus": 2,
-      "id": 2
+      "idStatus": 3,
+      "id": 2,
+      "startDate": "2023-11-10",
+      "revisionDate": "2023-11-07"
     },
     {
       "title": "Teste titulo 3",
