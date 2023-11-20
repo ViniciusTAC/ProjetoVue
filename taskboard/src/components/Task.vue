@@ -27,7 +27,7 @@
                     <v-text-field label="Título" outlined v-model="task.title"></v-text-field>
                     <v-text-field label="Descrição" outlined v-model="task.description"></v-text-field>
                     <v-textarea outlined name="input-7-2" label="SubTarefas" v-model="task.subtasks"></v-textarea>
-                    <v-textarea outlined name="input-7-2" label="Comentário" v-model="task.comment"></v-textarea>
+                    <v-textarea outlined name="input-7-2" label="Comentário" v-model="task.comments"></v-textarea>
                     <div v-if="checkEdition" class="text-center">
                         <div>
                             <span style="  font-weight: bold;font-size: large;">Data Início</span><br>
@@ -68,11 +68,11 @@
                                 </v-btn>
                             </template>
                             <v-list>
-                                <v-list-item v-for="(status) in listStatus" :key="status.idStatus"
-                                    v-if="status.idStatus != task.idStatus">
+                                <v-list-item v-for="(status) in status_list" :key="status.status_id"
+                                    v-if="status.id != task.status_id">
                                     <v-btn v-bind:color="status.color" variant="text" @click="changeStatus(status)">
                                         <span style="font-weight: bold;">
-                                            {{ status.tipo }}
+                                            {{ status.name }}
                                         </span>
                                     </v-btn>
                                 </v-list-item>
@@ -88,6 +88,7 @@
   
 <script>
 import ChangeTaskStatus from "./Change-Task-Status.vue"
+import axios from 'axios';
 export default {
     props: {
         open: {
@@ -101,7 +102,7 @@ export default {
     name: 'Atividade',
     data: () => ({
         task: {},
-        listStatus: [],
+        status_list: [],
         checkEdition: false,
         openChange: false,
         dataChangeStatus: {}
@@ -110,26 +111,46 @@ export default {
         save() {
             this.checkEdition ? this.updatedTaks() : this.addTask()
         },
-        async addTask() {
-            this.task.idStatus = 1
-            const dataJson = JSON.stringify(this.task);
-            const req = await fetch("http://localhost:3000/atividades", {
-                method: "POST",
-                headers: { "content-Type": "application/json" },
-                body: dataJson
-            });
-            this.$emit('close')
+        addTask() {
+            // this.task.idStatus = 1
+            // const dataJson = JSON.stringify(this.task);
+            // const req = await fetch("http://localhost:3000/atividades", {
+            //     method: "POST",
+            //     headers: { "content-Type": "application/json" },
+            //     body: dataJson
+            // });
+            // this.$emit('close')
+
+            // URL da API
+            const apiUrl = 'http://localhost:3000/tasks/';
+
+            // Dados a serem enviados no corpo da solicitação
+            var date = this.task
+            date.startDate = null,
+                date.revisionDate = null,
+                date.endDate = null,
+                date.status_id = 3
+            // Fazendo a solicitação POST
+            axios.post(apiUrl, date)
+                .then(response => {
+                    // Manipular a resposta aqui
+                    this.$emit('close')
+                })
+                .catch(error => {
+                    // Lidar com erros aqui
+                    console.error(error);
+                });
+
         },
         async updatedTaks() {
-            const dataJson = JSON.stringify(this.task);
-            const res = await fetch('http://localhost:3000/atividades/' + this.$route.params.id, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: dataJson
-            })
-            this.$emit('close')
+            const apiUrl = 'http://localhost:3000/tasks/'+ this.$route.params.id;
+            axios.put(apiUrl, this.task)
+                .then(response => {
+                    this.$emit('close')
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         },
         changeStatus(status) {
             var data = status
@@ -154,14 +175,23 @@ export default {
             })
             this.$emit('close')
         },
-        async getData() {
-            const req = await fetch("  http://localhost:3000/atividades?id=" + this.$route.params.id);
-            const atividades = await req.json();
-            this.task = atividades[0]
+        getData() {
+            axios.get("http://localhost:3000/tasks/" + this.$route.params.id)
+                .then(response => {
+                    this.task = response.data;
+                })
+                .catch(error => {
+                    console.error('Erro ao obter dados da Atividade:', error);
+                });
         },
-        async getStatus() {
-            const req = await fetch(" http://localhost:3000/status");
-            this.listStatus = await req.json();
+        getStatus() {
+            axios.get('http://localhost:3000/statuses')
+                .then(response => {
+                    this.status_list = response.data;
+                })
+                .catch(error => {
+                    console.error('Erro ao obter lista de Status:', error);
+                });
         },
         checkingEdit() {
             if (this.$route.params.id == undefined) {

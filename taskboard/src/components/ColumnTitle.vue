@@ -1,10 +1,8 @@
 <template>
     <div>
         <v-card :color="status.color" class="title">
-            {{ status.tipo }}
+            {{ status.name }}
         </v-card>
-
-
     </div>
 </template>
   

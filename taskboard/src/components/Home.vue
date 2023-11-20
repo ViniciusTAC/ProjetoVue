@@ -12,7 +12,7 @@
       </v-icon>
       Adicionar Atividade
     </v-btn>
-    <task :open="open" @close="open = false" />
+   <task :open="open" @close="open = false" />
     <columns />
   </div>
 </template>
@@ -27,7 +27,8 @@ export default {
   },
   name: 'Home',
   data: () => ({
-    open: false
+    open: false,
+    products: [],
   }),
   methods: {
     openDialog() {
@@ -52,6 +53,8 @@ export default {
     this.checkModal();
   },
   mounted() {
+
+
   },
   watch: {
     $route(to, from) {

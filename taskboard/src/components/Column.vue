@@ -2,7 +2,7 @@
     <div class="column">
         <column-title :status="status" />
         <div v-for="(task) in task_list.filter(
-            (tsk) => tsk.idStatus == status.idStatus
+            (tsk) => tsk.status_id == status.id
         )" :key="task.id">
             <task-card :task="task" />
 
@@ -15,6 +15,7 @@
 <script>
 import ColumnTitle from "./ColumnTitle.vue"
 import TaskCard from "./TaskCard.vue"
+import axios from 'axios';
 export default {
     props: {
         status: {
@@ -30,9 +31,14 @@ export default {
         task_list: [],
     }),
     methods: {
-        async getData() {
-            const req = await fetch("http://localhost:3000/atividades");
-            this.task_list = await req.json();
+        getData() {
+            axios.get('http://localhost:3000/tasks')
+                .then(response => {
+                    this.task_list = response.data;
+                })
+                .catch(error => {
+                    console.error('Erro ao obter lista de atividades:', error);
+                });
         }
     },
     created() {

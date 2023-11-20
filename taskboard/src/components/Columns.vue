@@ -2,7 +2,7 @@
     <div class="columns">
         <v-row class="row">
             <v-col no-gutters v-for="(status) in status_list" :key="status.idStatus">
-                <column :status="status" />
+              <column :status="status" />
             </v-col>
         </v-row>
     </div>
@@ -10,6 +10,7 @@
   
 <script>
 import Column from "./Column.vue"
+import axios from 'axios';
 export default {
     props: {},
     components: {
@@ -20,9 +21,14 @@ export default {
         status_list: []
     }),
     methods: {
-        async getStatus() {
-            const req = await fetch("http://localhost:3000/status");
-            this.status_list = await req.json();
+        getStatus() {
+            axios.get('http://localhost:3000/statuses')
+                .then(response => {
+                    this.status_list = response.data;
+                })
+                .catch(error => {
+                    console.error('Erro ao obter lista de status:', error);
+                });
         }
     },
     created() {
@@ -38,7 +44,8 @@ export default {
     width: 150%;
     margin-top: 15px;
 }
-.row{
+
+.row {
     margin: 0;
 }
 </style>

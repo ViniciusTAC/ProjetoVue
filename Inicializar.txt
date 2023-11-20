@@ -1,0 +1,16 @@
+Front-End
+cd taskboard
+npm run serve
+
+Back-End
+wsl
+cd backend
+rails server
+
+
+Banco e etc
+wsl
+code .
+cd backend
+sudo service postgresql start
+sudo service postgresql status
