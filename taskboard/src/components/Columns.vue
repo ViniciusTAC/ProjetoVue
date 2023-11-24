@@ -1,7 +1,7 @@
 <template>
     <div class="columns">
         <v-row class="row">
-            <v-col no-gutters v-for="(status) in status_list" :key="status.idStatus">
+            <v-col no-gutters v-for="(status) in status_list" :key="status.id" >
               <column :status="status" />
             </v-col>
         </v-row>
@@ -24,7 +24,7 @@ export default {
         getStatus() {
             axios.get('http://localhost:3000/statuses')
                 .then(response => {
-                    this.status_list = response.data;
+                    this.status_list = response.data.sort((a, b) => (a.priority > b.priority) ? 1 : -1);
                 })
                 .catch(error => {
                     console.error('Erro ao obter lista de status:', error);

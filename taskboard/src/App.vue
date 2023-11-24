@@ -1,4 +1,4 @@
-<template>
+<template lang="pt-br">
   <v-app id="app">
     <v-main>
       <router-view />
