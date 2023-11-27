@@ -169,9 +169,12 @@ export default {
                 date.revision_date = null,
                 date.end_date = null,
                 date.status_id = 3
+            date.sub_tasks_attributes = this.sub_task_prop.map(({ id, ...restoDaSubTask }) => ({ ...restoDaSubTask }));
+
             axios.post(apiUrl, date)
+
                 .then(response => {
-                    this.addSubTaskBackend(response.data.id)
+                    //this.addSubTaskBackend(response.data.id)
                     this.$emit('close')
                 })
                 .catch(error => {
@@ -197,7 +200,6 @@ export default {
                 .catch(error => {
                     console.error(error);
                 });
-            console.log('task2',task_id)
 
         },
         addSubTaskBackend(id_task) {
@@ -232,7 +234,7 @@ export default {
             var data = {
                 status_id: status.id
             }
-            console.log(data)
+            //console.log(data)
             //this.changeStatusUpdate(dada)
 
 
@@ -256,19 +258,35 @@ export default {
                     console.error('Erro ao obter dados da Atividade:', error);
                 });
         },
+        // getSubTask() {
+        //     axios.get("http://localhost:3000/sub_tasks/by_task_id/" + this.$route.params.id)
+        //         .then(response => {
+        //             if (response.data != 0) {
+        //                 this.open_sub_tasks = true
+        //                 this.sub_task_prop = response.data
+        //             }
+
+        //         })
+        //         .catch(error => {
+        //             console.error('Erro ao obter dados da Sub Tarefas:', error);
+        //         });
+        // },
+
         getSubTask() {
-            axios.get("http://localhost:3000/sub_tasks")
+            axios.get("http://localhost:3000/sub_tasks", {
+                params: {
+                    task_id: this.$route.params.id
+                }
+            })
                 .then(response => {
-                    var dados = response.data;
-                    var dadosFiltrados = dados.filter(dado => dado.task_id == this.$route.params.id)
-                    if (dadosFiltrados.length != 0) {
+                    if (response.data != 0) {
                         this.open_sub_tasks = true
-                        this.sub_task_prop = dadosFiltrados
+                        this.sub_task_prop = response.data
                     }
 
                 })
                 .catch(error => {
-                    console.error('Erro ao obter dados da Atividade:', error);
+                    console.error('Erro ao obter dados da Sub Tarefas:', error);
                 });
         },
 

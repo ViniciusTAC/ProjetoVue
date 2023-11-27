@@ -1,9 +1,9 @@
 <template>
     <div class="text-center" v-if="open">
-        <div class="edge_sub_tasks" v-for="(sub_task) in sub_task_list">
+        <div class="edge_sub_tasks" v-for="(sub_task) in sub_task_list" :key='sub_task.id'>
             <v-checkbox v-model="sub_task.finished" @click="checkSubTask(sub_task)">
                 <template v-slot:label>
-                    <div :id="'checkbox' + sub_task.id" class="label_checkbox">
+                    <div class="label_checkbox" :class="{ checked: sub_task.finished }">
                         {{ sub_task.description }}
                     </div>
                 </template>
@@ -47,10 +47,10 @@ export default {
             this.$emit('sendToTask', new_array);
             if (sub_task.id != null) {
                 this.deleteSubTasksBackend(sub_task)
-                
+
             }
         },
-        deleteSubTasksBackend(sub_task){
+        deleteSubTasksBackend(sub_task) {
             const apiUrl = `http://localhost:3000/sub_tasks/${sub_task.id}`;
             axios.delete(apiUrl)
                 .then(response => {
@@ -60,15 +60,10 @@ export default {
                 });
         },
         checkSubTask(sub_task) {
-            if (sub_task.finished) {
-                var text_element = document.getElementById("checkbox" + sub_task.id);
-                text_element.classList.toggle("checked");
-                this.checkSubTaskBackend(sub_task)
-            }
+            this.checkSubTaskBackend(sub_task)
 
         },
-        checkSubTaskBackend(sub_task){
-            // console.log(sub_task.id)
+        checkSubTaskBackend(sub_task) {
             const apiUrl = 'http://localhost:3000/sub_tasks/' + sub_task.id;
             axios.put(apiUrl, sub_task)
                 .then(response => {
@@ -77,14 +72,14 @@ export default {
                     console.error(error);
                 });
         },
-        checkEdication() {
-            
-            for (let index = 0; index < this.sub_task_list.length; index++) {
-                if (this.sub_task_list[index].finished) {
-                    //this.checkSubTask(this.sub_task_list[index])
-                }
-            }
-        }
+        // checkEdication() {
+
+        //     for (let index = 0; index < this.sub_task_list.length; index++) {
+        //         if (this.sub_task_list[index].finished) {
+        //             //this.checkSubTask(this.sub_task_list[index])
+        //         }
+        //     }
+        // }
 
     },
     computed: {
@@ -95,9 +90,9 @@ export default {
     },
     watch: {
         open() {
-            if (this.open) {
-                this.checkEdication()
-            }
+            // if (this.open) {
+            //     this.checkEdication()
+            // }
 
         }
     }
@@ -121,10 +116,16 @@ export default {
     margin-right: 5px;
 }
 
+
 .checked {
+    color: #04AA6D;
     text-decoration: line-through;
     font-weight: bold;
-    color: #04AA6D;
+}
+
+/* Estilos para quando o checkbox não está marcado (falso) */
+.label_checkbox:not(.checked) {
+    color: #800000;
 }
 </style>
   
