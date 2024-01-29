@@ -1,0 +1,77 @@
+0º passo: setar gemset
+codigo: rvm gemset list -> rvm gemset use <nome da gemset>
+
+1º passo: criar projeto rails
+codigo: rails new <nome da aplicação> --api --database=postgresql
+
+2º passo: acompanhar o video "Criando primeira API no Ruby on Rails com Postgresql"
+codigo: no video
+
+2.1º passo: criar a parte do database
+codigo: no video
+
+2.2º passo: adicionar informação no db
+codigo: no video
+
+2.3º passo: Use Axios para fazer solicitações HTTP:
+codigo: npm install axios
+
+2.4º passo: Faça uma solicitação GET no componente Vue:
+codigo :
+axios.get('http://localhost:3000/products').then(response => {
+	this.products = response.data;
+}).catch(error => {
+	console.error('Erro ao obter produtos:', error);
+});
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+rvm gemset list
+
+rvm gemset use teste
+
+rails new backend --api --database=postgresql
+
+cd backend
+
+bundle install
+
+code .
+
+dentro do vscode 
+
+arquivo database.yml
+
+adicionar as linhas de codigo:  user: vinetac ->  password: 314 em default: &default
+
+sudo service postgresql start
+
+rails db:create
+
+rails g scaffold statuses name:string
+
+rails g scaffold tasks title:string description:string subtasks:string comments:string startDate:date revisionDate:date endDate:date status:references
+
+rails db:migrate
+
+rails c
+
+status = Status.new(name: 'Prontas')
+
+status.save!
+
+reload!
+
+task = Task.new(title:'Taks 1', description:'', subtasks:'', comments:'', startDate:'', revisionDate:'', endDate:'', status_id:1)
+
+task.save!
+
+(adicionar e habilitar o CORS)
+
+rails server
+
+no frontend
+
+npm install axios
+
+rpm run serve
